@@ -1,4 +1,4 @@
-import 'package:barrier_free_test/domain/focus/entities/focus_meta_data.dart';
+import 'package:barrier_free_test/domain/focus/models/focus_meta_data.dart';
 import 'package:barrier_free_test/domain/focus/focus_meta_data_handler.dart';
 import 'package:barrier_free_test/domain/keyboard_event_handler/keyboard_event_handler.dart';
 

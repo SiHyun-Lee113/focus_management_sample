@@ -1,0 +1,120 @@
+import 'package:barrier_free_test/domain/focus/init/init_screen_focus_meta_data_handler.dart';
+import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit.dart';
+import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_keyboard_handler_extension.dart';
+import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_tts_service_extension.dart';
+import 'package:barrier_free_test/presentation/screen/init/init_screen_state.dart';
+import 'package:barrier_free_test/presentation/widgets/test_focus_widget.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class InitScreen extends StatefulWidget {
+  const InitScreen({super.key});
+
+  @override
+  State<InitScreen> createState() => _InitScreenState();
+}
+
+class _InitScreenState extends State<InitScreen> {
+  final FocusNode _keyboardFocusNode = FocusNode();
+  final _cubit = InitScreenCubit(
+    InitScreenState(),
+    focusMetaDataHandler: InitScreenFocusMetaDataHandler(),
+  );
+
+  @override
+  void dispose() {
+    _keyboardFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocProvider.value(
+        value: _cubit,
+        child: BlocConsumer<InitScreenCubit, InitScreenState>(
+          builder: (context, state) {
+            return RawKeyboardListener(
+              focusNode: _keyboardFocusNode,
+              autofocus: true,
+              onKey: (RawKeyEvent event) {
+                if (event is RawKeyDownEvent && !event.repeat) {
+                  _cubit.handelKeyEvent(event.logicalKey);
+                }
+              },
+              child: Column(
+                children: [
+                  _sectionHeader(state),
+                  _sectionStartOrder(state),
+                  _sectionLanguage(state),
+                ],
+              ),
+            );
+          },
+          listener: (context, state) {
+            _handleTtsEvent(context, state);
+          },
+        ),
+      ),
+    );
+  }
+
+  void _handleTtsEvent(BuildContext context, InitScreenState state) {
+    final ttsEvent = state.ttsScenarioEvent?.consume();
+    if (ttsEvent == null) return;
+
+    _cubit.handelTtsEvent(ttsEvent);
+  }
+
+  Widget _sectionHeader(InitScreenState state) {
+    return TestFocusWidget(
+      hasFocus: state.currentFocusMetaData?.focusId == 'initHeaderId',
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TestFocusWidget(
+            hasFocus: state.currentFocusMetaData?.focusId == 'widgetHome',
+            child: ElevatedButton(onPressed: () {}, child: Text('처음으로')),
+          ),
+          TestFocusWidget(
+            hasFocus: state.currentFocusMetaData?.focusId == 'widgetCallAgent',
+            child: ElevatedButton(onPressed: () {}, child: Text('직원호출')),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _sectionStartOrder(InitScreenState state) {
+    return TestFocusWidget(
+      hasFocus: state.currentFocusMetaData?.focusId == 'initStartOrderFocusId',
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TestFocusWidget(
+            hasFocus: state.currentFocusMetaData?.focusId == 'widgetStartOrder',
+            child: ElevatedButton(onPressed: () {}, child: Text('주문하기')),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _sectionLanguage(InitScreenState state) {
+    return TestFocusWidget(
+      hasFocus: state.currentFocusMetaData?.focusId == 'initLanguageFocusId',
+      child: Row(
+        children: [
+          ...List.generate(state.languageList.length, (index) {
+            return TestFocusWidget(
+                hasFocus: state.currentFocusMetaData?.focusId == 'languageId${state.languageList[index]}',
+                child: ElevatedButton(onPressed: () {}, child: Text(state.languageList[index])),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}
