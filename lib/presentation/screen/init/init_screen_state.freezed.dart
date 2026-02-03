@@ -17,8 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$InitScreenState {
-  InitFocusMetaData? get currentFocusMetaData =>
-      throw _privateConstructorUsedError;
   List<String> get languageList => throw _privateConstructorUsedError;
   OneTimeEvent<InitScreenTtsScenarioEvent>? get ttsScenarioEvent =>
       throw _privateConstructorUsedError;
@@ -39,13 +37,10 @@ abstract class $InitScreenStateCopyWith<$Res> {
   ) = _$InitScreenStateCopyWithImpl<$Res, InitScreenState>;
   @useResult
   $Res call({
-    InitFocusMetaData? currentFocusMetaData,
     List<String> languageList,
     OneTimeEvent<InitScreenTtsScenarioEvent>? ttsScenarioEvent,
     bool isVoiceMode,
   });
-
-  $InitFocusMetaDataCopyWith<$Res>? get currentFocusMetaData;
 }
 
 /// @nodoc
@@ -63,17 +58,12 @@ class _$InitScreenStateCopyWithImpl<$Res, $Val extends InitScreenState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentFocusMetaData = freezed,
     Object? languageList = null,
     Object? ttsScenarioEvent = freezed,
     Object? isVoiceMode = null,
   }) {
     return _then(
       _value.copyWith(
-            currentFocusMetaData: freezed == currentFocusMetaData
-                ? _value.currentFocusMetaData
-                : currentFocusMetaData // ignore: cast_nullable_to_non_nullable
-                      as InitFocusMetaData?,
             languageList: null == languageList
                 ? _value.languageList
                 : languageList // ignore: cast_nullable_to_non_nullable
@@ -90,22 +80,6 @@ class _$InitScreenStateCopyWithImpl<$Res, $Val extends InitScreenState>
           as $Val,
     );
   }
-
-  /// Create a copy of InitScreenState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $InitFocusMetaDataCopyWith<$Res>? get currentFocusMetaData {
-    if (_value.currentFocusMetaData == null) {
-      return null;
-    }
-
-    return $InitFocusMetaDataCopyWith<$Res>(_value.currentFocusMetaData!, (
-      value,
-    ) {
-      return _then(_value.copyWith(currentFocusMetaData: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -118,14 +92,10 @@ abstract class _$$InitScreenStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    InitFocusMetaData? currentFocusMetaData,
     List<String> languageList,
     OneTimeEvent<InitScreenTtsScenarioEvent>? ttsScenarioEvent,
     bool isVoiceMode,
   });
-
-  @override
-  $InitFocusMetaDataCopyWith<$Res>? get currentFocusMetaData;
 }
 
 /// @nodoc
@@ -142,17 +112,12 @@ class __$$InitScreenStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentFocusMetaData = freezed,
     Object? languageList = null,
     Object? ttsScenarioEvent = freezed,
     Object? isVoiceMode = null,
   }) {
     return _then(
       _$InitScreenStateImpl(
-        currentFocusMetaData: freezed == currentFocusMetaData
-            ? _value.currentFocusMetaData
-            : currentFocusMetaData // ignore: cast_nullable_to_non_nullable
-                  as InitFocusMetaData?,
         languageList: null == languageList
             ? _value._languageList
             : languageList // ignore: cast_nullable_to_non_nullable
@@ -174,15 +139,12 @@ class __$$InitScreenStateImplCopyWithImpl<$Res>
 
 class _$InitScreenStateImpl extends _InitScreenState {
   const _$InitScreenStateImpl({
-    this.currentFocusMetaData,
     final List<String> languageList = const [],
     this.ttsScenarioEvent,
     this.isVoiceMode = false,
   }) : _languageList = languageList,
        super._();
 
-  @override
-  final InitFocusMetaData? currentFocusMetaData;
   final List<String> _languageList;
   @override
   @JsonKey()
@@ -200,7 +162,7 @@ class _$InitScreenStateImpl extends _InitScreenState {
 
   @override
   String toString() {
-    return 'InitScreenState(currentFocusMetaData: $currentFocusMetaData, languageList: $languageList, ttsScenarioEvent: $ttsScenarioEvent, isVoiceMode: $isVoiceMode)';
+    return 'InitScreenState(languageList: $languageList, ttsScenarioEvent: $ttsScenarioEvent, isVoiceMode: $isVoiceMode)';
   }
 
   @override
@@ -208,8 +170,6 @@ class _$InitScreenStateImpl extends _InitScreenState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitScreenStateImpl &&
-            (identical(other.currentFocusMetaData, currentFocusMetaData) ||
-                other.currentFocusMetaData == currentFocusMetaData) &&
             const DeepCollectionEquality().equals(
               other._languageList,
               _languageList,
@@ -223,7 +183,6 @@ class _$InitScreenStateImpl extends _InitScreenState {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    currentFocusMetaData,
     const DeepCollectionEquality().hash(_languageList),
     ttsScenarioEvent,
     isVoiceMode,
@@ -243,15 +202,12 @@ class _$InitScreenStateImpl extends _InitScreenState {
 
 abstract class _InitScreenState extends InitScreenState {
   const factory _InitScreenState({
-    final InitFocusMetaData? currentFocusMetaData,
     final List<String> languageList,
     final OneTimeEvent<InitScreenTtsScenarioEvent>? ttsScenarioEvent,
     final bool isVoiceMode,
   }) = _$InitScreenStateImpl;
   const _InitScreenState._() : super._();
 
-  @override
-  InitFocusMetaData? get currentFocusMetaData;
   @override
   List<String> get languageList;
   @override

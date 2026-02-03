@@ -1,35 +1,23 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
-
-import 'package:barrier_free_test/domain/focus/models/focus_meta_data.dart';
 import 'package:barrier_free_test/domain/tts/tts_service.dart';
 import 'package:barrier_free_test/presentation/common/models/one_time_event.dart';
-import 'package:barrier_free_test/presentation/screen/init/model/init_focus_meta_data.dart';
-import 'package:barrier_free_test/domain/focus/init/init_screen_focus_meta_data_handler.dart';
-import 'package:barrier_free_test/enum/focus/init_screen_focus_code.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen_state.dart';
 import 'package:barrier_free_test/presentation/screen/init/model/init_screen_tts_scenario_event.dart';
-import 'package:barrier_free_test/presentation/screen/init/model/utils/mapper.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:win32audio/win32audio.dart';
 
 class InitScreenCubit extends Cubit<InitScreenState> {
-  final InitScreenFocusMetaDataHandler focusMetaDataHandler;
   final TtsService ttsService;
 
-  StreamSubscription<InitFocusMetaData>? _focusMetaDataStreamSubscription;
   int deviceSpeakerCount = 0;
 
   InitScreenCubit(
     super.initialState, {
-    required this.focusMetaDataHandler,
     required this.ttsService,
   }) {
     _initResource();
-    initScreenMetaDataResource();
-    _initSubscription();
+    _initAudioListener();
     _initDeviceSpeakerCount();
   }
 
@@ -43,38 +31,22 @@ class InitScreenCubit extends Cubit<InitScreenState> {
 
   void navigateHome() {
     print('InitScreenCubit.navigateHome');
-    if (state.isVoiceMode) {
-      String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_home);
-      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
-      _clickSoundEvent();
-    }
+    _clickSoundEvent();
   }
 
   void callAgent() {
     print('InitScreenCubit.callAgent');
-    if (state.isVoiceMode) {
-      String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_call_agent);
-      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
-      _clickSoundEvent();
-    }
+    _clickSoundEvent();
   }
 
   void navigateStartOrder() {
     print('InitScreenCubit.navigateStartOrder');
-    if (state.isVoiceMode) {
-      String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_start_order);
-      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
-      _clickSoundEvent();
-    }
+    _clickSoundEvent();
   }
 
   void changeLanguage(String language) {
     print('InitScreenCubit.changeLanguage $language');
-    if (state.isVoiceMode) {
-      String id = focusMetaDataHandler.getLanguageFocusMetaDataId(language);
-      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
-      _clickSoundEvent();
-    }
+    _clickSoundEvent();
   }
 
   void _initResource() async {
@@ -91,22 +63,7 @@ class InitScreenCubit extends Cubit<InitScreenState> {
 
   Timer? _audioChangeDebounce;
 
-  void _initSubscription() {
-    _focusMetaDataStreamSubscription = focusMetaDataHandler.getFocusMetaDataStream().listen((
-      focusMetaData,
-    ) {
-      print('InitScreenCubit._initSubscription ${focusMetaData.focusId}');
-
-      emit(
-        state.copyWith(
-          currentFocusMetaData: focusMetaData,
-          ttsScenarioEvent: OneTimeEvent(
-            data: InitFocusMetaDataMapper.toTtsScenarioEvent(focusMetaData),
-          ),
-        ),
-      );
-    });
-
+  void _initAudioListener() {
     Audio.addChangeListener((String type, String id) {
       _audioChangeDebounce?.cancel();
       _audioChangeDebounce = Timer(const Duration(milliseconds: 500), () async {
@@ -143,24 +100,11 @@ class InitScreenCubit extends Cubit<InitScreenState> {
     }
   }
 
-  void initScreenMetaDataResource() {
-    List<InitFocusMetaData> focusMetaDataList = InitFocusMetaData.defaultFocusMetaDataList();
-
-    for (var focusMetaData in focusMetaDataList) {
-      focusMetaDataHandler.addFocusMetaData(focusMetaData);
-    }
-
-    for (var language in state.languageList) {
-      focusMetaDataHandler.addFocusMetaData(
-        InitFocusMetaData.language(
-          focusCode: InitScreenFocusCode.widget_language,
-          focusId: 'languageId$language',
-          parentFocusId: InitFocusMetaData.initLanguageSectionFocusId,
-          languageName: language,
-        ),
-      );
-    }
-
-    focusMetaDataHandler.setCurrentFocusMetaDataById(InitFocusMetaData.initScreenFocusId);
+  void announce(InitScreenTtsScenarioEvent event) {
+    emit(
+      state.copyWith(
+        ttsScenarioEvent: OneTimeEvent(data: event),
+      ),
+    );
   }
 }
