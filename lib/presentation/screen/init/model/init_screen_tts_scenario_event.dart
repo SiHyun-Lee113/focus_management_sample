@@ -35,3 +35,7 @@ class InitScreenWidgetLanguage extends InitScreenTtsScenarioEvent  {
 
   const InitScreenWidgetLanguage(this.language);
 }
+
+class InitScreenButtonClick extends InitScreenTtsScenarioEvent {
+  const InitScreenButtonClick();
+}

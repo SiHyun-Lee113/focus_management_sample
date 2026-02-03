@@ -32,6 +32,8 @@ extension InitScreenCubitTtsServiceExtension on InitScreenCubit {
       case InitScreenWidgetLanguage():
         ttsService.speak(event.language);
         break;
+      case InitScreenButtonClick():
+        ttsService.speak('click');
     }
   }
 }

@@ -116,24 +116,24 @@ mixin _$InitFocusMetaData {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Screen value) screen,
-    required TResult Function(Section value) section,
-    required TResult Function(Widget value) widget,
-    required TResult Function(Language value) language,
+    required TResult Function(ScreenLevel value) screen,
+    required TResult Function(SectionLevel value) section,
+    required TResult Function(WidgetLevel value) widget,
+    required TResult Function(LanguageLevel value) language,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Screen value)? screen,
-    TResult? Function(Section value)? section,
-    TResult? Function(Widget value)? widget,
-    TResult? Function(Language value)? language,
+    TResult? Function(ScreenLevel value)? screen,
+    TResult? Function(SectionLevel value)? section,
+    TResult? Function(WidgetLevel value)? widget,
+    TResult? Function(LanguageLevel value)? language,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Screen value)? screen,
-    TResult Function(Section value)? section,
-    TResult Function(Widget value)? widget,
-    TResult Function(Language value)? language,
+    TResult Function(ScreenLevel value)? screen,
+    TResult Function(SectionLevel value)? section,
+    TResult Function(WidgetLevel value)? widget,
+    TResult Function(LanguageLevel value)? language,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 
@@ -198,12 +198,12 @@ class _$InitFocusMetaDataCopyWithImpl<$Res, $Val extends InitFocusMetaData>
 }
 
 /// @nodoc
-abstract class _$$ScreenImplCopyWith<$Res>
+abstract class _$$ScreenLevelImplCopyWith<$Res>
     implements $InitFocusMetaDataCopyWith<$Res> {
-  factory _$$ScreenImplCopyWith(
-    _$ScreenImpl value,
-    $Res Function(_$ScreenImpl) then,
-  ) = __$$ScreenImplCopyWithImpl<$Res>;
+  factory _$$ScreenLevelImplCopyWith(
+    _$ScreenLevelImpl value,
+    $Res Function(_$ScreenLevelImpl) then,
+  ) = __$$ScreenLevelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -215,12 +215,12 @@ abstract class _$$ScreenImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ScreenImplCopyWithImpl<$Res>
-    extends _$InitFocusMetaDataCopyWithImpl<$Res, _$ScreenImpl>
-    implements _$$ScreenImplCopyWith<$Res> {
-  __$$ScreenImplCopyWithImpl(
-    _$ScreenImpl _value,
-    $Res Function(_$ScreenImpl) _then,
+class __$$ScreenLevelImplCopyWithImpl<$Res>
+    extends _$InitFocusMetaDataCopyWithImpl<$Res, _$ScreenLevelImpl>
+    implements _$$ScreenLevelImplCopyWith<$Res> {
+  __$$ScreenLevelImplCopyWithImpl(
+    _$ScreenLevelImpl _value,
+    $Res Function(_$ScreenLevelImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of InitFocusMetaData
@@ -234,7 +234,7 @@ class __$$ScreenImplCopyWithImpl<$Res>
     Object? screenName = null,
   }) {
     return _then(
-      _$ScreenImpl(
+      _$ScreenLevelImpl(
         focusCode: null == focusCode
             ? _value.focusCode
             : focusCode // ignore: cast_nullable_to_non_nullable
@@ -258,8 +258,8 @@ class __$$ScreenImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ScreenImpl extends Screen {
-  const _$ScreenImpl({
+class _$ScreenLevelImpl extends ScreenLevel {
+  const _$ScreenLevelImpl({
     this.focusCode = InitScreenFocusCode.screen,
     required this.focusId,
     this.parentFocusId = 'initScreen',
@@ -286,7 +286,7 @@ class _$ScreenImpl extends Screen {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ScreenImpl &&
+            other is _$ScreenLevelImpl &&
             (identical(other.focusCode, focusCode) ||
                 other.focusCode == focusCode) &&
             (identical(other.focusId, focusId) || other.focusId == focusId) &&
@@ -305,8 +305,8 @@ class _$ScreenImpl extends Screen {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ScreenImplCopyWith<_$ScreenImpl> get copyWith =>
-      __$$ScreenImplCopyWithImpl<_$ScreenImpl>(this, _$identity);
+  _$$ScreenLevelImplCopyWith<_$ScreenLevelImpl> get copyWith =>
+      __$$ScreenLevelImplCopyWithImpl<_$ScreenLevelImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -420,10 +420,10 @@ class _$ScreenImpl extends Screen {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Screen value) screen,
-    required TResult Function(Section value) section,
-    required TResult Function(Widget value) widget,
-    required TResult Function(Language value) language,
+    required TResult Function(ScreenLevel value) screen,
+    required TResult Function(SectionLevel value) section,
+    required TResult Function(WidgetLevel value) widget,
+    required TResult Function(LanguageLevel value) language,
   }) {
     return screen(this);
   }
@@ -431,10 +431,10 @@ class _$ScreenImpl extends Screen {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Screen value)? screen,
-    TResult? Function(Section value)? section,
-    TResult? Function(Widget value)? widget,
-    TResult? Function(Language value)? language,
+    TResult? Function(ScreenLevel value)? screen,
+    TResult? Function(SectionLevel value)? section,
+    TResult? Function(WidgetLevel value)? widget,
+    TResult? Function(LanguageLevel value)? language,
   }) {
     return screen?.call(this);
   }
@@ -442,10 +442,10 @@ class _$ScreenImpl extends Screen {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Screen value)? screen,
-    TResult Function(Section value)? section,
-    TResult Function(Widget value)? widget,
-    TResult Function(Language value)? language,
+    TResult Function(ScreenLevel value)? screen,
+    TResult Function(SectionLevel value)? section,
+    TResult Function(WidgetLevel value)? widget,
+    TResult Function(LanguageLevel value)? language,
     required TResult orElse(),
   }) {
     if (screen != null) {
@@ -455,14 +455,14 @@ class _$ScreenImpl extends Screen {
   }
 }
 
-abstract class Screen extends InitFocusMetaData {
-  const factory Screen({
+abstract class ScreenLevel extends InitFocusMetaData {
+  const factory ScreenLevel({
     final InitScreenFocusCode focusCode,
     required final String focusId,
     final String parentFocusId,
     required final String screenName,
-  }) = _$ScreenImpl;
-  const Screen._() : super._();
+  }) = _$ScreenLevelImpl;
+  const ScreenLevel._() : super._();
 
   @override
   InitScreenFocusCode get focusCode;
@@ -476,17 +476,17 @@ abstract class Screen extends InitFocusMetaData {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ScreenImplCopyWith<_$ScreenImpl> get copyWith =>
+  _$$ScreenLevelImplCopyWith<_$ScreenLevelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SectionImplCopyWith<$Res>
+abstract class _$$SectionLevelImplCopyWith<$Res>
     implements $InitFocusMetaDataCopyWith<$Res> {
-  factory _$$SectionImplCopyWith(
-    _$SectionImpl value,
-    $Res Function(_$SectionImpl) then,
-  ) = __$$SectionImplCopyWithImpl<$Res>;
+  factory _$$SectionLevelImplCopyWith(
+    _$SectionLevelImpl value,
+    $Res Function(_$SectionLevelImpl) then,
+  ) = __$$SectionLevelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -498,12 +498,12 @@ abstract class _$$SectionImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SectionImplCopyWithImpl<$Res>
-    extends _$InitFocusMetaDataCopyWithImpl<$Res, _$SectionImpl>
-    implements _$$SectionImplCopyWith<$Res> {
-  __$$SectionImplCopyWithImpl(
-    _$SectionImpl _value,
-    $Res Function(_$SectionImpl) _then,
+class __$$SectionLevelImplCopyWithImpl<$Res>
+    extends _$InitFocusMetaDataCopyWithImpl<$Res, _$SectionLevelImpl>
+    implements _$$SectionLevelImplCopyWith<$Res> {
+  __$$SectionLevelImplCopyWithImpl(
+    _$SectionLevelImpl _value,
+    $Res Function(_$SectionLevelImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of InitFocusMetaData
@@ -517,7 +517,7 @@ class __$$SectionImplCopyWithImpl<$Res>
     Object? sectionName = null,
   }) {
     return _then(
-      _$SectionImpl(
+      _$SectionLevelImpl(
         focusCode: null == focusCode
             ? _value.focusCode
             : focusCode // ignore: cast_nullable_to_non_nullable
@@ -541,8 +541,8 @@ class __$$SectionImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SectionImpl extends Section {
-  const _$SectionImpl({
+class _$SectionLevelImpl extends SectionLevel {
+  const _$SectionLevelImpl({
     required this.focusCode,
     required this.focusId,
     required this.parentFocusId,
@@ -567,7 +567,7 @@ class _$SectionImpl extends Section {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SectionImpl &&
+            other is _$SectionLevelImpl &&
             (identical(other.focusCode, focusCode) ||
                 other.focusCode == focusCode) &&
             (identical(other.focusId, focusId) || other.focusId == focusId) &&
@@ -586,8 +586,8 @@ class _$SectionImpl extends Section {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SectionImplCopyWith<_$SectionImpl> get copyWith =>
-      __$$SectionImplCopyWithImpl<_$SectionImpl>(this, _$identity);
+  _$$SectionLevelImplCopyWith<_$SectionLevelImpl> get copyWith =>
+      __$$SectionLevelImplCopyWithImpl<_$SectionLevelImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -701,10 +701,10 @@ class _$SectionImpl extends Section {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Screen value) screen,
-    required TResult Function(Section value) section,
-    required TResult Function(Widget value) widget,
-    required TResult Function(Language value) language,
+    required TResult Function(ScreenLevel value) screen,
+    required TResult Function(SectionLevel value) section,
+    required TResult Function(WidgetLevel value) widget,
+    required TResult Function(LanguageLevel value) language,
   }) {
     return section(this);
   }
@@ -712,10 +712,10 @@ class _$SectionImpl extends Section {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Screen value)? screen,
-    TResult? Function(Section value)? section,
-    TResult? Function(Widget value)? widget,
-    TResult? Function(Language value)? language,
+    TResult? Function(ScreenLevel value)? screen,
+    TResult? Function(SectionLevel value)? section,
+    TResult? Function(WidgetLevel value)? widget,
+    TResult? Function(LanguageLevel value)? language,
   }) {
     return section?.call(this);
   }
@@ -723,10 +723,10 @@ class _$SectionImpl extends Section {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Screen value)? screen,
-    TResult Function(Section value)? section,
-    TResult Function(Widget value)? widget,
-    TResult Function(Language value)? language,
+    TResult Function(ScreenLevel value)? screen,
+    TResult Function(SectionLevel value)? section,
+    TResult Function(WidgetLevel value)? widget,
+    TResult Function(LanguageLevel value)? language,
     required TResult orElse(),
   }) {
     if (section != null) {
@@ -736,14 +736,14 @@ class _$SectionImpl extends Section {
   }
 }
 
-abstract class Section extends InitFocusMetaData {
-  const factory Section({
+abstract class SectionLevel extends InitFocusMetaData {
+  const factory SectionLevel({
     required final InitScreenFocusCode focusCode,
     required final String focusId,
     required final String parentFocusId,
     required final String sectionName,
-  }) = _$SectionImpl;
-  const Section._() : super._();
+  }) = _$SectionLevelImpl;
+  const SectionLevel._() : super._();
 
   @override
   InitScreenFocusCode get focusCode;
@@ -757,17 +757,17 @@ abstract class Section extends InitFocusMetaData {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SectionImplCopyWith<_$SectionImpl> get copyWith =>
+  _$$SectionLevelImplCopyWith<_$SectionLevelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$WidgetImplCopyWith<$Res>
+abstract class _$$WidgetLevelImplCopyWith<$Res>
     implements $InitFocusMetaDataCopyWith<$Res> {
-  factory _$$WidgetImplCopyWith(
-    _$WidgetImpl value,
-    $Res Function(_$WidgetImpl) then,
-  ) = __$$WidgetImplCopyWithImpl<$Res>;
+  factory _$$WidgetLevelImplCopyWith(
+    _$WidgetLevelImpl value,
+    $Res Function(_$WidgetLevelImpl) then,
+  ) = __$$WidgetLevelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -779,12 +779,12 @@ abstract class _$$WidgetImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$WidgetImplCopyWithImpl<$Res>
-    extends _$InitFocusMetaDataCopyWithImpl<$Res, _$WidgetImpl>
-    implements _$$WidgetImplCopyWith<$Res> {
-  __$$WidgetImplCopyWithImpl(
-    _$WidgetImpl _value,
-    $Res Function(_$WidgetImpl) _then,
+class __$$WidgetLevelImplCopyWithImpl<$Res>
+    extends _$InitFocusMetaDataCopyWithImpl<$Res, _$WidgetLevelImpl>
+    implements _$$WidgetLevelImplCopyWith<$Res> {
+  __$$WidgetLevelImplCopyWithImpl(
+    _$WidgetLevelImpl _value,
+    $Res Function(_$WidgetLevelImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of InitFocusMetaData
@@ -798,7 +798,7 @@ class __$$WidgetImplCopyWithImpl<$Res>
     Object? widgetName = null,
   }) {
     return _then(
-      _$WidgetImpl(
+      _$WidgetLevelImpl(
         focusCode: null == focusCode
             ? _value.focusCode
             : focusCode // ignore: cast_nullable_to_non_nullable
@@ -822,8 +822,8 @@ class __$$WidgetImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$WidgetImpl extends Widget {
-  const _$WidgetImpl({
+class _$WidgetLevelImpl extends WidgetLevel {
+  const _$WidgetLevelImpl({
     required this.focusCode,
     required this.focusId,
     required this.parentFocusId,
@@ -848,7 +848,7 @@ class _$WidgetImpl extends Widget {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WidgetImpl &&
+            other is _$WidgetLevelImpl &&
             (identical(other.focusCode, focusCode) ||
                 other.focusCode == focusCode) &&
             (identical(other.focusId, focusId) || other.focusId == focusId) &&
@@ -867,8 +867,8 @@ class _$WidgetImpl extends Widget {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$WidgetImplCopyWith<_$WidgetImpl> get copyWith =>
-      __$$WidgetImplCopyWithImpl<_$WidgetImpl>(this, _$identity);
+  _$$WidgetLevelImplCopyWith<_$WidgetLevelImpl> get copyWith =>
+      __$$WidgetLevelImplCopyWithImpl<_$WidgetLevelImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -982,10 +982,10 @@ class _$WidgetImpl extends Widget {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Screen value) screen,
-    required TResult Function(Section value) section,
-    required TResult Function(Widget value) widget,
-    required TResult Function(Language value) language,
+    required TResult Function(ScreenLevel value) screen,
+    required TResult Function(SectionLevel value) section,
+    required TResult Function(WidgetLevel value) widget,
+    required TResult Function(LanguageLevel value) language,
   }) {
     return widget(this);
   }
@@ -993,10 +993,10 @@ class _$WidgetImpl extends Widget {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Screen value)? screen,
-    TResult? Function(Section value)? section,
-    TResult? Function(Widget value)? widget,
-    TResult? Function(Language value)? language,
+    TResult? Function(ScreenLevel value)? screen,
+    TResult? Function(SectionLevel value)? section,
+    TResult? Function(WidgetLevel value)? widget,
+    TResult? Function(LanguageLevel value)? language,
   }) {
     return widget?.call(this);
   }
@@ -1004,10 +1004,10 @@ class _$WidgetImpl extends Widget {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Screen value)? screen,
-    TResult Function(Section value)? section,
-    TResult Function(Widget value)? widget,
-    TResult Function(Language value)? language,
+    TResult Function(ScreenLevel value)? screen,
+    TResult Function(SectionLevel value)? section,
+    TResult Function(WidgetLevel value)? widget,
+    TResult Function(LanguageLevel value)? language,
     required TResult orElse(),
   }) {
     if (widget != null) {
@@ -1017,14 +1017,14 @@ class _$WidgetImpl extends Widget {
   }
 }
 
-abstract class Widget extends InitFocusMetaData {
-  const factory Widget({
+abstract class WidgetLevel extends InitFocusMetaData {
+  const factory WidgetLevel({
     required final InitScreenFocusCode focusCode,
     required final String focusId,
     required final String parentFocusId,
     required final String widgetName,
-  }) = _$WidgetImpl;
-  const Widget._() : super._();
+  }) = _$WidgetLevelImpl;
+  const WidgetLevel._() : super._();
 
   @override
   InitScreenFocusCode get focusCode;
@@ -1038,17 +1038,17 @@ abstract class Widget extends InitFocusMetaData {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WidgetImplCopyWith<_$WidgetImpl> get copyWith =>
+  _$$WidgetLevelImplCopyWith<_$WidgetLevelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LanguageImplCopyWith<$Res>
+abstract class _$$LanguageLevelImplCopyWith<$Res>
     implements $InitFocusMetaDataCopyWith<$Res> {
-  factory _$$LanguageImplCopyWith(
-    _$LanguageImpl value,
-    $Res Function(_$LanguageImpl) then,
-  ) = __$$LanguageImplCopyWithImpl<$Res>;
+  factory _$$LanguageLevelImplCopyWith(
+    _$LanguageLevelImpl value,
+    $Res Function(_$LanguageLevelImpl) then,
+  ) = __$$LanguageLevelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -1060,12 +1060,12 @@ abstract class _$$LanguageImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$LanguageImplCopyWithImpl<$Res>
-    extends _$InitFocusMetaDataCopyWithImpl<$Res, _$LanguageImpl>
-    implements _$$LanguageImplCopyWith<$Res> {
-  __$$LanguageImplCopyWithImpl(
-    _$LanguageImpl _value,
-    $Res Function(_$LanguageImpl) _then,
+class __$$LanguageLevelImplCopyWithImpl<$Res>
+    extends _$InitFocusMetaDataCopyWithImpl<$Res, _$LanguageLevelImpl>
+    implements _$$LanguageLevelImplCopyWith<$Res> {
+  __$$LanguageLevelImplCopyWithImpl(
+    _$LanguageLevelImpl _value,
+    $Res Function(_$LanguageLevelImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of InitFocusMetaData
@@ -1079,7 +1079,7 @@ class __$$LanguageImplCopyWithImpl<$Res>
     Object? languageName = null,
   }) {
     return _then(
-      _$LanguageImpl(
+      _$LanguageLevelImpl(
         focusCode: null == focusCode
             ? _value.focusCode
             : focusCode // ignore: cast_nullable_to_non_nullable
@@ -1103,8 +1103,8 @@ class __$$LanguageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LanguageImpl extends Language {
-  const _$LanguageImpl({
+class _$LanguageLevelImpl extends LanguageLevel {
+  const _$LanguageLevelImpl({
     this.focusCode = InitScreenFocusCode.widget_language,
     required this.focusId,
     required this.parentFocusId,
@@ -1130,7 +1130,7 @@ class _$LanguageImpl extends Language {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LanguageImpl &&
+            other is _$LanguageLevelImpl &&
             (identical(other.focusCode, focusCode) ||
                 other.focusCode == focusCode) &&
             (identical(other.focusId, focusId) || other.focusId == focusId) &&
@@ -1149,8 +1149,8 @@ class _$LanguageImpl extends Language {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LanguageImplCopyWith<_$LanguageImpl> get copyWith =>
-      __$$LanguageImplCopyWithImpl<_$LanguageImpl>(this, _$identity);
+  _$$LanguageLevelImplCopyWith<_$LanguageLevelImpl> get copyWith =>
+      __$$LanguageLevelImplCopyWithImpl<_$LanguageLevelImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1264,10 +1264,10 @@ class _$LanguageImpl extends Language {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Screen value) screen,
-    required TResult Function(Section value) section,
-    required TResult Function(Widget value) widget,
-    required TResult Function(Language value) language,
+    required TResult Function(ScreenLevel value) screen,
+    required TResult Function(SectionLevel value) section,
+    required TResult Function(WidgetLevel value) widget,
+    required TResult Function(LanguageLevel value) language,
   }) {
     return language(this);
   }
@@ -1275,10 +1275,10 @@ class _$LanguageImpl extends Language {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Screen value)? screen,
-    TResult? Function(Section value)? section,
-    TResult? Function(Widget value)? widget,
-    TResult? Function(Language value)? language,
+    TResult? Function(ScreenLevel value)? screen,
+    TResult? Function(SectionLevel value)? section,
+    TResult? Function(WidgetLevel value)? widget,
+    TResult? Function(LanguageLevel value)? language,
   }) {
     return language?.call(this);
   }
@@ -1286,10 +1286,10 @@ class _$LanguageImpl extends Language {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Screen value)? screen,
-    TResult Function(Section value)? section,
-    TResult Function(Widget value)? widget,
-    TResult Function(Language value)? language,
+    TResult Function(ScreenLevel value)? screen,
+    TResult Function(SectionLevel value)? section,
+    TResult Function(WidgetLevel value)? widget,
+    TResult Function(LanguageLevel value)? language,
     required TResult orElse(),
   }) {
     if (language != null) {
@@ -1299,14 +1299,14 @@ class _$LanguageImpl extends Language {
   }
 }
 
-abstract class Language extends InitFocusMetaData {
-  const factory Language({
+abstract class LanguageLevel extends InitFocusMetaData {
+  const factory LanguageLevel({
     final InitScreenFocusCode focusCode,
     required final String focusId,
     required final String parentFocusId,
     required final String languageName,
-  }) = _$LanguageImpl;
-  const Language._() : super._();
+  }) = _$LanguageLevelImpl;
+  const LanguageLevel._() : super._();
 
   @override
   InitScreenFocusCode get focusCode;
@@ -1320,6 +1320,6 @@ abstract class Language extends InitFocusMetaData {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LanguageImplCopyWith<_$LanguageImpl> get copyWith =>
+  _$$LanguageLevelImplCopyWith<_$LanguageLevelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

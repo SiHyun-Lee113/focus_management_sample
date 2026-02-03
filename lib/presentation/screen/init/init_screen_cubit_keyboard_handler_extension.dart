@@ -7,7 +7,7 @@ extension InitScreenCubitKeyboardHandlerExtension on InitScreenCubit {
   void handelKeyEvent(LogicalKeyboardKey event) {
     switch (event) {
       case LogicalKeyboardKey.enter:
-        if (state.currentFocusMetaData is Widget || state.currentFocusMetaData is Language) {
+        if (state.currentFocusMetaData is WidgetLevel || state.currentFocusMetaData is LanguageLevel) {
           if (state.currentFocusMetaData != null) {
             widgetActionHandler(state.currentFocusMetaData!);
           }
@@ -41,14 +41,14 @@ extension InitScreenCubitKeyboardHandlerExtension on InitScreenCubit {
   void widgetActionHandler(InitFocusMetaData focusMetaData) {
     switch (focusMetaData.focusCode) {
       case InitScreenFocusCode.widget_home:
-        print('홈 스크린 이동 로직');
+        navigateHome();
       case InitScreenFocusCode.widget_call_agent:
-        print('직원 호출 로직');
+        callAgent();
       case InitScreenFocusCode.widget_start_order:
-        print('메뉴 스트린 이동 로직');
+        navigateStartOrder();
       case InitScreenFocusCode.widget_language:
-        final languageFocusMetaData = focusMetaData as Language;
-        print('언어 변경 로직 : ${languageFocusMetaData.languageName}');
+        final languageFocusMetaData = focusMetaData as LanguageLevel;
+        changeLanguage(languageFocusMetaData.languageName);
       case _:
         break;
     }

@@ -9,7 +9,8 @@ import 'package:barrier_free_test/presentation/screen/init/model/init_focus_meta
 import 'package:barrier_free_test/domain/focus/init/init_screen_focus_meta_data_handler.dart';
 import 'package:barrier_free_test/enum/focus/init_screen_focus_code.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen_state.dart';
-import 'package:barrier_free_test/presentation/screen/init/model/mapper/mapper.dart';
+import 'package:barrier_free_test/presentation/screen/init/model/init_screen_tts_scenario_event.dart';
+import 'package:barrier_free_test/presentation/screen/init/model/utils/mapper.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:win32audio/win32audio.dart';
@@ -32,89 +33,52 @@ class InitScreenCubit extends Cubit<InitScreenState> {
     _initDeviceSpeakerCount();
   }
 
-  void test() {}
+  void _clickSoundEvent() {
+    emit(state.copyWith(
+      ttsScenarioEvent: OneTimeEvent(
+        data: InitScreenButtonClick(),
+      ),
+    ));
+  }
+
+  void navigateHome() {
+    print('InitScreenCubit.navigateHome');
+    if (state.isVoiceMode) {
+      String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_home);
+      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
+      _clickSoundEvent();
+    }
+  }
+
+  void callAgent() {
+    print('InitScreenCubit.callAgent');
+    if (state.isVoiceMode) {
+      String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_call_agent);
+      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
+      _clickSoundEvent();
+    }
+  }
+
+  void navigateStartOrder() {
+    print('InitScreenCubit.navigateStartOrder');
+    if (state.isVoiceMode) {
+      String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_start_order);
+      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
+      _clickSoundEvent();
+    }
+  }
+
+  void changeLanguage(String language) {
+    print('InitScreenCubit.changeLanguage $language');
+    if (state.isVoiceMode) {
+      String id = focusMetaDataHandler.getLanguageFocusMetaDataId(language);
+      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
+      _clickSoundEvent();
+    }
+  }
 
   void _initResource() async {
     emit(state.copyWith(languageList: ['한국어', '영어', '중국어', '일어']));
-  }
-
-  void initScreenMetaDataResource() {
-    final String initScreenFocusId = 'initFocusId';
-
-    final String initHeaderFocusId = 'initHeaderId';
-    final String initStartOrderFocusId = 'initStartOrderFocusId';
-    final String initLanguageFocusId = 'initLanguageFocusId';
-
-    focusMetaDataHandler.addFocusMetaData(
-      InitFocusMetaData.screen(focusId: initScreenFocusId, screenName: '초기 설정 화면'),
-    );
-
-    focusMetaDataHandler.addFocusMetaData(
-      InitFocusMetaData.section(
-        focusCode: InitScreenFocusCode.section_header,
-        focusId: initHeaderFocusId,
-        parentFocusId: initScreenFocusId,
-        sectionName: '상단 영역',
-      ),
-    );
-
-    focusMetaDataHandler.addFocusMetaData(
-      InitFocusMetaData.widget(
-        focusCode: InitScreenFocusCode.widget_home,
-        focusId: 'widgetHome',
-        parentFocusId: initHeaderFocusId,
-        widgetName: '처음으로',
-      ),
-    );
-
-    focusMetaDataHandler.addFocusMetaData(
-      InitFocusMetaData.widget(
-        focusCode: InitScreenFocusCode.widget_call_agent,
-        focusId: 'widgetCallAgent',
-        parentFocusId: initHeaderFocusId,
-        widgetName: '직원호출',
-      ),
-    );
-
-    focusMetaDataHandler.addFocusMetaData(
-      InitFocusMetaData.section(
-        focusCode: InitScreenFocusCode.section_start_order,
-        focusId: initStartOrderFocusId,
-        parentFocusId: initScreenFocusId,
-        sectionName: '주문 영역',
-      ),
-    );
-
-    focusMetaDataHandler.addFocusMetaData(
-      InitFocusMetaData.widget(
-        focusCode: InitScreenFocusCode.widget_start_order,
-        focusId: 'widgetStartOrder',
-        parentFocusId: initStartOrderFocusId,
-        widgetName: '주문 하기',
-      ),
-    );
-
-    focusMetaDataHandler.addFocusMetaData(
-      InitFocusMetaData.section(
-        focusCode: InitScreenFocusCode.section_language,
-        focusId: initLanguageFocusId,
-        parentFocusId: initScreenFocusId,
-        sectionName: '언어 영역',
-      ),
-    );
-
-    for (var language in state.languageList) {
-      focusMetaDataHandler.addFocusMetaData(
-        InitFocusMetaData.language(
-          focusCode: InitScreenFocusCode.widget_language,
-          focusId: 'languageId$language',
-          parentFocusId: initLanguageFocusId,
-          languageName: language,
-        ),
-      );
-    }
-
-    focusMetaDataHandler.setCurrentScreenFocusMetaDataById(initScreenFocusId);
   }
 
   Future<void> _initDeviceSpeakerCount() async {
@@ -131,12 +95,7 @@ class InitScreenCubit extends Cubit<InitScreenState> {
     _focusMetaDataStreamSubscription = focusMetaDataHandler.getFocusMetaDataStream().listen((
       focusMetaData,
     ) {
-      print(
-        'InitScreenCubit._initSubscription ${focusMetaData.focusId}, ${focusMetaData.focusCode}',
-      );
-      print(
-        'InitScreenCubit._initSubscription ${InitFocusMetaDataMapper.toTtsScenarioEvent(focusMetaData)}',
-      );
+      print('InitScreenCubit._initSubscription ${focusMetaData.focusId}');
 
       emit(
         state.copyWith(
@@ -182,5 +141,26 @@ class InitScreenCubit extends Cubit<InitScreenState> {
       print(stack);
       return false;
     }
+  }
+
+  void initScreenMetaDataResource() {
+    List<InitFocusMetaData> focusMetaDataList = InitFocusMetaData.defaultFocusMetaDataList();
+
+    for (var focusMetaData in focusMetaDataList) {
+      focusMetaDataHandler.addFocusMetaData(focusMetaData);
+    }
+
+    for (var language in state.languageList) {
+      focusMetaDataHandler.addFocusMetaData(
+        InitFocusMetaData.language(
+          focusCode: InitScreenFocusCode.widget_language,
+          focusId: 'languageId$language',
+          parentFocusId: InitFocusMetaData.initLanguageSectionFocusId,
+          languageName: language,
+        ),
+      );
+    }
+
+    focusMetaDataHandler.setCurrentFocusMetaDataById(InitFocusMetaData.initScreenFocusId);
   }
 }

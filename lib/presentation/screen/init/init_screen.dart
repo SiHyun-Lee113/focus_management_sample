@@ -4,6 +4,7 @@ import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit.dar
 import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_keyboard_handler_extension.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_tts_service_extension.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen_state.dart';
+import 'package:barrier_free_test/presentation/screen/init/model/init_focus_meta_data.dart';
 import 'package:barrier_free_test/presentation/widgets/test_focus_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -72,17 +73,17 @@ class _InitScreenState extends State<InitScreen> {
 
   Widget _sectionHeader(InitScreenState state) {
     return TestFocusWidget(
-      hasFocus: state.currentFocusMetaData?.focusId == 'initHeaderId',
+      hasFocus: state.currentFocusMetaData?.focusId == InitFocusMetaData.initHeaderSectionFocusId,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TestFocusWidget(
-            hasFocus: state.currentFocusMetaData?.focusId == 'widgetHome',
-            child: ElevatedButton(onPressed: () {}, child: Text('처음으로')),
+            hasFocus: state.currentFocusMetaData?.focusId == InitFocusMetaData.initHomeButtonFocusId,
+            child: ElevatedButton(onPressed: _cubit.navigateHome, child: Text('처음으로')),
           ),
           TestFocusWidget(
-            hasFocus: state.currentFocusMetaData?.focusId == 'widgetCallAgent',
-            child: ElevatedButton(onPressed: () {}, child: Text('직원호출')),
+            hasFocus: state.currentFocusMetaData?.focusId == InitFocusMetaData.initCallAgentButtonFocusId,
+            child: ElevatedButton(onPressed: _cubit.callAgent, child: Text('직원호출')),
           ),
         ],
       ),
@@ -91,13 +92,13 @@ class _InitScreenState extends State<InitScreen> {
 
   Widget _sectionStartOrder(InitScreenState state) {
     return TestFocusWidget(
-      hasFocus: state.currentFocusMetaData?.focusId == 'initStartOrderFocusId',
+      hasFocus: state.currentFocusMetaData?.focusId == InitFocusMetaData.initStartOrderSectionFocusId,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TestFocusWidget(
-            hasFocus: state.currentFocusMetaData?.focusId == 'widgetStartOrder',
-            child: ElevatedButton(onPressed: () {}, child: Text('주문하기')),
+            hasFocus: state.currentFocusMetaData?.focusId == InitFocusMetaData.initStartOrderButtonFocusId,
+            child: ElevatedButton(onPressed: _cubit.navigateStartOrder, child: Text('주문하기')),
           ),
         ],
       ),
@@ -106,13 +107,15 @@ class _InitScreenState extends State<InitScreen> {
 
   Widget _sectionLanguage(InitScreenState state) {
     return TestFocusWidget(
-      hasFocus: state.currentFocusMetaData?.focusId == 'initLanguageFocusId',
+      hasFocus: state.currentFocusMetaData?.focusId == InitFocusMetaData.initLanguageSectionFocusId,
       child: Row(
         children: [
           ...List.generate(state.languageList.length, (index) {
             return TestFocusWidget(
                 hasFocus: state.currentFocusMetaData?.focusId == 'languageId${state.languageList[index]}',
-                child: ElevatedButton(onPressed: () {}, child: Text(state.languageList[index])),
+                child: ElevatedButton(onPressed: () {
+                  _cubit.changeLanguage(state.languageList[index]);
+                }, child: Text(state.languageList[index])),
             );
           }),
         ],

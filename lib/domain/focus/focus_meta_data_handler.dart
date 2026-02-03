@@ -7,9 +7,7 @@ abstract interface class FocusMetaDataHandler<T extends FocusMetaData> {
 
   T? getCurrentFocusMetaData();
   Stream<T> getFocusMetaDataStream();
-  void setCurrentScreenFocusMetaDataById(String focusMetaDataId);
-  void setCurrentSectionFocusMetaDataById(String focusMetaDataId);
-  void setCurrentWidgetFocusMetaDataById(String focusMetaDataId);
+  void setCurrentFocusMetaDataById(String focusMetaDataId);
   void clearCurrentFocusMetaData();
 
   T? getRightWidgetFocusMetaData();

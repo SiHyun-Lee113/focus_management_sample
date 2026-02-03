@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:barrier_free_test/enum/focus/init_screen_focus_code.dart';
 import 'package:barrier_free_test/presentation/screen/init/model/init_focus_meta_data.dart';
 import 'package:collection/collection.dart';
 
@@ -22,9 +23,11 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   InitFocusMetaData _findByFocusId(String id) =>
       _allFocusMetaData.firstWhere((e) => e.focusId == id);
 
-  void _updateCurrentInitFocusMetaData(InitFocusMetaData meta) {
+  void _updateCurrentInitFocusMetaData(InitFocusMetaData meta, {bool applyStream = true}) {
     _currentFocusMetaData = meta;
-    _streamController.add(meta);
+    if (applyStream) {
+      _streamController.add(meta);
+    }
   }
 
   InitFocusMetaData? _moveInList(List<InitFocusMetaData> list, String currentId, int offset) {
@@ -70,16 +73,8 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   Stream<InitFocusMetaData> getFocusMetaDataStream() => _streamController.stream;
 
   @override
-  void setCurrentScreenFocusMetaDataById(String id) =>
-      _updateCurrentInitFocusMetaData(_findByFocusId(id) as Screen);
-
-  @override
-  void setCurrentSectionFocusMetaDataById(String id) =>
-      _updateCurrentInitFocusMetaData(_findByFocusId(id) as Section);
-
-  @override
-  void setCurrentWidgetFocusMetaDataById(String id) =>
-      _updateCurrentInitFocusMetaData(_findByFocusId(id) as Widget);
+  void setCurrentFocusMetaDataById(String id, {bool applyStream = true}) =>
+      _updateCurrentInitFocusMetaData(_findByFocusId(id), applyStream: applyStream);
 
   /* ----------------------------- navigation ----------------------------- */
 
@@ -92,29 +87,29 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   InitFocusMetaData? _moveSection(int offset) {
     if (_currentFocusMetaData == null) throw Exception('currentFocusMetaData is null');
 
-    if (_currentFocusMetaData is Screen) {
+    if (_currentFocusMetaData is ScreenLevel) {
       final next = _childrenOf(_currentFocusMetaData!.focusId).firstOrNull;
       if (next != null) _updateCurrentInitFocusMetaData(next);
       return next;
     }
 
-    if (_currentFocusMetaData is Section) {
-      final section = _currentFocusMetaData as Section;
+    if (_currentFocusMetaData is SectionLevel) {
+      final section = _currentFocusMetaData as SectionLevel;
       final list = _childrenOf(section.parentFocusId);
       final next = _moveInList(list, section.focusId, offset);
       if (next != null) _updateCurrentInitFocusMetaData(next);
       return next;
     }
 
-    if (_currentFocusMetaData is Widget) {
-      final section = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Section;
+    if (_currentFocusMetaData is WidgetLevel) {
+      final section = _findByFocusId(_currentFocusMetaData!.parentFocusId) as SectionLevel;
       // _updateCurrentInitFocusMetaData(section);
       _currentFocusMetaData = section;
       return _moveSection(offset);
     }
 
-    if (_currentFocusMetaData is Language) {
-      final section = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Section;
+    if (_currentFocusMetaData is LanguageLevel) {
+      final section = _findByFocusId(_currentFocusMetaData!.parentFocusId) as SectionLevel;
       // _updateCurrentInitFocusMetaData(section);
       _currentFocusMetaData = section;
       return _moveSection(offset);
@@ -130,7 +125,7 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   InitFocusMetaData? getRightWidgetFocusMetaData() => _moveWidget(1);
 
   InitFocusMetaData? _moveWidget(int offset) {
-    if (_currentFocusMetaData is! Widget && _currentFocusMetaData is! Language) return null;
+    if (_currentFocusMetaData is! WidgetLevel && _currentFocusMetaData is! LanguageLevel) return null;
 
     final current = _currentFocusMetaData!;
     final list = _childrenOf(current.parentFocusId);
@@ -144,9 +139,9 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   InitFocusMetaData? getChildWidgetFocusMetaData() {
     if (_currentFocusMetaData == null) throw Exception('currentFocusMetaData is null');
 
-    if (_currentFocusMetaData is Screen) return getDownSectionFocusMetaData();
+    if (_currentFocusMetaData is ScreenLevel) return getDownSectionFocusMetaData();
 
-    if (_currentFocusMetaData is Section) {
+    if (_currentFocusMetaData is SectionLevel) {
       final next = _childrenOf(_currentFocusMetaData!.focusId).firstOrNull;
       if (next != null) _updateCurrentInitFocusMetaData(next);
       return next;
@@ -159,24 +154,61 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   InitFocusMetaData? getParentFocusMetaData() {
     if (_currentFocusMetaData == null) throw Exception('currentFocusMetaData is null');
 
-    if (_currentFocusMetaData is Section) {
-      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Screen;
+    if (_currentFocusMetaData is SectionLevel) {
+      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as ScreenLevel;
       _updateCurrentInitFocusMetaData(parent);
       return parent;
     }
 
-    if (_currentFocusMetaData is Widget) {
-      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Section;
+    if (_currentFocusMetaData is WidgetLevel) {
+      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as SectionLevel;
       _updateCurrentInitFocusMetaData(parent);
       return parent;
     }
 
-    if (_currentFocusMetaData is Language) {
-      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Section;
+    if (_currentFocusMetaData is LanguageLevel) {
+      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as SectionLevel;
       _updateCurrentInitFocusMetaData(parent);
       return parent;
     }
 
     return null;
+  }
+
+  String getLanguageFocusMetaDataId(String languageName) {
+    InitFocusMetaData? language = _allFocusMetaData.firstWhereOrNull((e) => e is LanguageLevel && e.languageName == languageName);
+
+    if (language == null) throw Exception('languageId is null $languageName');
+
+    return language.focusId;
+  }
+
+  String getFocusMetaDataIdByFocusCode(InitScreenFocusCode focusCode) {
+    switch (focusCode) {
+      case InitScreenFocusCode.screen:
+        return InitFocusMetaData.initScreenFocusId;
+
+      case InitScreenFocusCode.section_header:
+        return InitFocusMetaData.initHeaderSectionFocusId;
+
+      case InitScreenFocusCode.section_start_order:
+        return InitFocusMetaData.initStartOrderSectionFocusId;
+
+      case InitScreenFocusCode.section_language:
+        return InitFocusMetaData.initLanguageSectionFocusId;
+
+      case InitScreenFocusCode.widget_home:
+        return InitFocusMetaData.initHomeButtonFocusId;
+
+      case InitScreenFocusCode.widget_call_agent:
+        return InitFocusMetaData.initCallAgentButtonFocusId;
+
+      case InitScreenFocusCode.widget_start_order:
+        return InitFocusMetaData.initStartOrderButtonFocusId;
+
+      case _:
+        throw UnimplementedError();
+    }
+
   }
 }

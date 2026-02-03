@@ -27,7 +27,7 @@ extension InitFocusMetaDataMapper on InitFocusMetaData {
         return const InitScreenWidgetStartOrder();
 
       case InitScreenFocusCode.widget_language:
-        Language language = initFocusMetaData as Language;
+        LanguageLevel language = initFocusMetaData as LanguageLevel;
         return InitScreenWidgetLanguage(language.languageName);
     }
   }
