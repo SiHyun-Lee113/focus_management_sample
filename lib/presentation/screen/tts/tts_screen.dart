@@ -1,8 +1,8 @@
 import 'dart:io' show Platform;
 
 import 'package:barrier_free_test/data/tts/flutter_tts_service.dart';
-import 'package:barrier_free_test/domain/tts/tts_service.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen.dart';
+import 'package:barrier_free_test/presentation/screen/tts/global_tts_demo_screen.dart';
 import 'package:barrier_free_test/presentation/screen/tts/tts_screen_cubit.dart';
 import 'package:barrier_free_test/presentation/screen/tts/tts_screen_state.dart';
 import 'package:barrier_free_test/presentation/widgets/test_focus_widget.dart';
@@ -71,6 +71,15 @@ class _TtsScreenState extends State<TtsScreen> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => InitScreen()));
                       },
                       child: const Text('to init'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const GlobalTtsDemoScreen()),
+                        );
+                      },
+                      child: const Text('to global tts'),
                     ),
                   ],
                 ),

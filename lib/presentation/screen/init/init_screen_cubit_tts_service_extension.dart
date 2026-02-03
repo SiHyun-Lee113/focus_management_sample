@@ -7,33 +7,33 @@ extension InitScreenCubitTtsServiceExtension on InitScreenCubit {
 
     print('handelTtsEvent $event');
 
-    switch(event) {
+    switch (event) {
       case InitScreenApproach():
-        ttsService.speak('초기 화면입니다.');
+        await ttsService.speak('초기 화면입니다.');
         break;
       case InitScreenSectionHeader():
-        ttsService.speak('헤더 영역입니다.');
+        await ttsService.speak('헤더 영역입니다.');
         break;
       case InitScreenSectionStartOrder():
-        ttsService.speak('주문하기 영역입니다.');
+        await ttsService.speak('주문하기 영역입니다.');
         break;
       case InitScreenSectionLanguage():
-        ttsService.speak('언어를 선택할 수 있는 영역입니다.');
+        await ttsService.speak('언어를 선택할 수 있는 영역입니다.');
         break;
       case InitScreenWidgetHome():
-        ttsService.speak('홈 화면으로 이동하는 버튼입니다.');
+        await ttsService.speak('홈 화면으로 이동하는 버튼입니다.');
         break;
       case InitScreenWidgetCallAgent():
-        ttsService.speak('직원 호출 버튼입니다.');
+        await ttsService.speak('직원 호출 버튼입니다.');
         break;
       case InitScreenWidgetStartOrder():
-        ttsService.speak('주문 시작 버튼입니다.');
+        await ttsService.speak('주문 시작 버튼입니다.');
         break;
       case InitScreenWidgetLanguage():
-        ttsService.speak(event.language);
+        await ttsService.speak(event.language);
         break;
       case InitScreenButtonClick():
-        ttsService.speak('click');
+        await ttsService.speak('click');
     }
   }
 }

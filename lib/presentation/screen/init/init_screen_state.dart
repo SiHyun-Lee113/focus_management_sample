@@ -1,5 +1,5 @@
-import 'package:barrier_free_test/presentation/screen/init/model/init_focus_meta_data.dart';
 import 'package:barrier_free_test/presentation/common/models/one_time_event.dart';
+import 'package:barrier_free_test/presentation/screen/init/model/init_focus_meta_data.dart';
 import 'package:barrier_free_test/presentation/screen/init/model/init_screen_tts_scenario_event.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

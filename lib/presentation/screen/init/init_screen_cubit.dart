@@ -31,6 +31,10 @@ class InitScreenCubit extends Cubit<InitScreenState> {
     initScreenMetaDataResource();
     _initSubscription();
     _initDeviceSpeakerCount();
+  
+    emit(state.copyWith(
+            isVoiceMode: true,
+          ));
   }
 
   void _clickSoundEvent() {
@@ -45,7 +49,7 @@ class InitScreenCubit extends Cubit<InitScreenState> {
     print('InitScreenCubit.navigateHome');
     if (state.isVoiceMode) {
       String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_home);
-      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
+      focusMetaDataHandler.setCurrentFocusMetaDataById(id, applyStream: false);
       _clickSoundEvent();
     }
   }
@@ -54,7 +58,7 @@ class InitScreenCubit extends Cubit<InitScreenState> {
     print('InitScreenCubit.callAgent');
     if (state.isVoiceMode) {
       String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_call_agent);
-      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
+      focusMetaDataHandler.setCurrentFocusMetaDataById(id, applyStream: false);
       _clickSoundEvent();
     }
   }
@@ -63,7 +67,7 @@ class InitScreenCubit extends Cubit<InitScreenState> {
     print('InitScreenCubit.navigateStartOrder');
     if (state.isVoiceMode) {
       String id = focusMetaDataHandler.getFocusMetaDataIdByFocusCode(InitScreenFocusCode.widget_start_order);
-      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
+      focusMetaDataHandler.setCurrentFocusMetaDataById(id, applyStream: false);
       _clickSoundEvent();
     }
   }
@@ -72,7 +76,7 @@ class InitScreenCubit extends Cubit<InitScreenState> {
     print('InitScreenCubit.changeLanguage $language');
     if (state.isVoiceMode) {
       String id = focusMetaDataHandler.getLanguageFocusMetaDataId(language);
-      focusMetaDataHandler.setCurrentFocusMetaDataById(id);
+      focusMetaDataHandler.setCurrentFocusMetaDataById(id, applyStream: false);
       _clickSoundEvent();
     }
   }
