@@ -4,8 +4,26 @@ import 'package:barrier_free_test/domain/tts/tts_service.dart';
 
 class FlutterTtsService implements TtsService {
   final FlutterTts _tts;
+  bool _isSpeaking = false;
+  String _lastText = '';
 
-  FlutterTtsService({FlutterTts? tts}) : _tts = tts ?? FlutterTts();
+  FlutterTtsService({FlutterTts? tts}) : _tts = tts ?? FlutterTts() {
+    _tts.setStartHandler(() {
+      _isSpeaking = true;
+    });
+
+    _tts.setCompletionHandler(() {
+      _isSpeaking = false;
+    });
+
+    _tts.setCancelHandler(() {
+      _isSpeaking = false;
+    });
+
+    _tts.setErrorHandler((_) {
+      _isSpeaking = false;
+    });
+  }
 
   @override
   Future<void> setAwaitSpeakCompletion(bool enabled) async {
@@ -94,7 +112,21 @@ class FlutterTtsService implements TtsService {
 
   @override
   Future<void> speak(String text) async {
+    if (_isSpeaking) {
+      await _tts.stop();
+    }
+
+    _lastText = text;
     await _tts.speak(text);
+  }
+
+  @override
+  Future<void> repeat() async {
+    if (_isSpeaking) {
+      await _tts.stop();
+    }
+
+    await _tts.speak(_lastText);
   }
 
   @override

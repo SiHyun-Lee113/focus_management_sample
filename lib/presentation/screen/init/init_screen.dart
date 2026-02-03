@@ -1,3 +1,4 @@
+import 'package:barrier_free_test/data/tts/flutter_tts_service.dart';
 import 'package:barrier_free_test/domain/focus/init/init_screen_focus_meta_data_handler.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_keyboard_handler_extension.dart';
@@ -21,6 +22,7 @@ class _InitScreenState extends State<InitScreen> {
   final _cubit = InitScreenCubit(
     InitScreenState(),
     focusMetaDataHandler: InitScreenFocusMetaDataHandler(),
+    ttsService: FlutterTtsService(),
   );
 
   @override

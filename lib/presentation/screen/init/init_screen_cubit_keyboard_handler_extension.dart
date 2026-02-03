@@ -29,6 +29,10 @@ extension InitScreenCubitKeyboardHandlerExtension on InitScreenCubit {
       case LogicalKeyboardKey.arrowLeft:
         focusMetaDataHandler.getLeftWidgetFocusMetaData();
         break;
+      /// TODO 실제 기기 다시듣기 버튼으로 수정
+      case LogicalKeyboardKey.backspace:
+        ttsService.repeat();
+        break;
       case _:
         break;
     }

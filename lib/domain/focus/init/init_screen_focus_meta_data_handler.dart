@@ -8,7 +8,7 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   final StreamController<InitFocusMetaData> _streamController =
       StreamController<InitFocusMetaData>.broadcast();
 
-  InitFocusMetaData? _currentInitFocusMetaData;
+  InitFocusMetaData? _currentFocusMetaData;
 
   final Map<String, List<InitFocusMetaData>> _treeFocusMetaDataMap = {};
   final List<InitFocusMetaData> _allFocusMetaData = [];
@@ -23,7 +23,7 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
       _allFocusMetaData.firstWhere((e) => e.focusId == id);
 
   void _updateCurrentInitFocusMetaData(InitFocusMetaData meta) {
-    _currentInitFocusMetaData = meta;
+    _currentFocusMetaData = meta;
     _streamController.add(meta);
   }
 
@@ -60,11 +60,11 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
     _treeFocusMetaDataMap.clear();
     _allFocusMetaData.clear();
     _sortOrderMap.clear();
-    _currentInitFocusMetaData = null;
+    _currentFocusMetaData = null;
   }
 
   @override
-  InitFocusMetaData? getCurrentFocusMetaData() => _currentInitFocusMetaData;
+  InitFocusMetaData? getCurrentFocusMetaData() => _currentFocusMetaData;
 
   @override
   Stream<InitFocusMetaData> getFocusMetaDataStream() => _streamController.stream;
@@ -90,31 +90,33 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   InitFocusMetaData? getUpSectionFocusMetaData() => _moveSection(-1);
 
   InitFocusMetaData? _moveSection(int offset) {
-    if (_currentInitFocusMetaData == null) throw Exception('currentFocusMetaData is null');
+    if (_currentFocusMetaData == null) throw Exception('currentFocusMetaData is null');
 
-    if (_currentInitFocusMetaData is Screen) {
-      final next = _childrenOf(_currentInitFocusMetaData!.focusId).firstOrNull;
+    if (_currentFocusMetaData is Screen) {
+      final next = _childrenOf(_currentFocusMetaData!.focusId).firstOrNull;
       if (next != null) _updateCurrentInitFocusMetaData(next);
       return next;
     }
 
-    if (_currentInitFocusMetaData is Section) {
-      final section = _currentInitFocusMetaData as Section;
+    if (_currentFocusMetaData is Section) {
+      final section = _currentFocusMetaData as Section;
       final list = _childrenOf(section.parentFocusId);
       final next = _moveInList(list, section.focusId, offset);
       if (next != null) _updateCurrentInitFocusMetaData(next);
       return next;
     }
 
-    if (_currentInitFocusMetaData is Widget) {
-      final section = _findByFocusId(_currentInitFocusMetaData!.parentFocusId) as Section;
-      _updateCurrentInitFocusMetaData(section);
+    if (_currentFocusMetaData is Widget) {
+      final section = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Section;
+      // _updateCurrentInitFocusMetaData(section);
+      _currentFocusMetaData = section;
       return _moveSection(offset);
     }
 
-    if (_currentInitFocusMetaData is Language) {
-      final section = _findByFocusId(_currentInitFocusMetaData!.parentFocusId) as Section;
-      _updateCurrentInitFocusMetaData(section);
+    if (_currentFocusMetaData is Language) {
+      final section = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Section;
+      // _updateCurrentInitFocusMetaData(section);
+      _currentFocusMetaData = section;
       return _moveSection(offset);
     }
 
@@ -128,9 +130,9 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   InitFocusMetaData? getRightWidgetFocusMetaData() => _moveWidget(1);
 
   InitFocusMetaData? _moveWidget(int offset) {
-    if (_currentInitFocusMetaData is! Widget && _currentInitFocusMetaData is! Language) return null;
+    if (_currentFocusMetaData is! Widget && _currentFocusMetaData is! Language) return null;
 
-    final current = _currentInitFocusMetaData!;
+    final current = _currentFocusMetaData!;
     final list = _childrenOf(current.parentFocusId);
 
     final next = _moveInList(list, current.focusId, offset);
@@ -140,12 +142,12 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
 
   @override
   InitFocusMetaData? getChildWidgetFocusMetaData() {
-    if (_currentInitFocusMetaData == null) throw Exception('currentFocusMetaData is null');
+    if (_currentFocusMetaData == null) throw Exception('currentFocusMetaData is null');
 
-    if (_currentInitFocusMetaData is Screen) return getDownSectionFocusMetaData();
+    if (_currentFocusMetaData is Screen) return getDownSectionFocusMetaData();
 
-    if (_currentInitFocusMetaData is Section) {
-      final next = _childrenOf(_currentInitFocusMetaData!.focusId).firstOrNull;
+    if (_currentFocusMetaData is Section) {
+      final next = _childrenOf(_currentFocusMetaData!.focusId).firstOrNull;
       if (next != null) _updateCurrentInitFocusMetaData(next);
       return next;
     }
@@ -155,22 +157,22 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
 
   @override
   InitFocusMetaData? getParentFocusMetaData() {
-    if (_currentInitFocusMetaData == null) throw Exception('currentFocusMetaData is null');
+    if (_currentFocusMetaData == null) throw Exception('currentFocusMetaData is null');
 
-    if (_currentInitFocusMetaData is Section) {
-      final parent = _findByFocusId(_currentInitFocusMetaData!.parentFocusId) as Screen;
+    if (_currentFocusMetaData is Section) {
+      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Screen;
       _updateCurrentInitFocusMetaData(parent);
       return parent;
     }
 
-    if (_currentInitFocusMetaData is Widget) {
-      final parent = _findByFocusId(_currentInitFocusMetaData!.parentFocusId) as Section;
+    if (_currentFocusMetaData is Widget) {
+      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Section;
       _updateCurrentInitFocusMetaData(parent);
       return parent;
     }
 
-    if (_currentInitFocusMetaData is Language) {
-      final parent = _findByFocusId(_currentInitFocusMetaData!.parentFocusId) as Section;
+    if (_currentFocusMetaData is Language) {
+      final parent = _findByFocusId(_currentFocusMetaData!.parentFocusId) as Section;
       _updateCurrentInitFocusMetaData(parent);
       return parent;
     }

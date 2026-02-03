@@ -12,5 +12,6 @@ abstract class InitScreenState with _$InitScreenState {
     InitFocusMetaData? currentFocusMetaData,
     @Default([]) List<String> languageList,
     OneTimeEvent<InitScreenTtsScenarioEvent>? ttsScenarioEvent,
+    @Default(false) bool isVoiceMode,
   }) = _InitScreenState;
 }

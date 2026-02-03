@@ -26,6 +26,7 @@ abstract class TtsService {
   Future<void> setSpeechRate(double rate);
   Future<void> setPitch(double pitch);
   Future<void> speak(String text);
+  Future<void> repeat();
   Future<int?> stop();
   Future<int?> pause();
   Future<void> synthesizeToFile(String text, String fileName);
