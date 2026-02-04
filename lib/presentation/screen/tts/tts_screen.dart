@@ -2,10 +2,8 @@ import 'dart:io' show Platform;
 
 import 'package:barrier_free_test/data/tts/flutter_tts_service.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen.dart';
-import 'package:barrier_free_test/presentation/screen/tts/global_tts_demo_screen.dart';
 import 'package:barrier_free_test/presentation/screen/tts/tts_screen_cubit.dart';
 import 'package:barrier_free_test/presentation/screen/tts/tts_screen_state.dart';
-import 'package:barrier_free_test/presentation/widgets/test_focus_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,15 +70,6 @@ class _TtsScreenState extends State<TtsScreen> {
                       },
                       child: const Text('to init'),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const GlobalTtsDemoScreen()),
-                        );
-                      },
-                      child: const Text('to global tts'),
-                    ),
                   ],
                 ),
               ),
@@ -129,29 +118,23 @@ class _TtsScreenState extends State<TtsScreen> {
   Widget _inputSection() => Container(
         alignment: Alignment.topCenter,
         padding: const EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
-        child: TestFocusWidget(
-          hasFocus: true,
-          child: TextField(
-            maxLines: 11,
-            minLines: 6,
-            onChanged: _cubit.onTextChanged,
-          ),
+        child: TextField(
+          maxLines: 11,
+          minLines: 6,
+          onChanged: _cubit.onTextChanged,
         ),
       );
 
   Widget _btnSection() {
-    return TestFocusWidget(
-      hasFocus: true,
-      child: Container(
-        padding: const EdgeInsets.only(top: 50.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildButtonColumn(Colors.green, Colors.greenAccent, Icons.play_arrow, 'PLAY', _cubit.speak),
-            _buildButtonColumn(Colors.red, Colors.redAccent, Icons.stop, 'STOP', _cubit.stop),
-            _buildButtonColumn(Colors.blue, Colors.blueAccent, Icons.pause, 'PAUSE', _cubit.pause),
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.only(top: 50.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildButtonColumn(Colors.green, Colors.greenAccent, Icons.play_arrow, 'PLAY', _cubit.speak),
+          _buildButtonColumn(Colors.red, Colors.redAccent, Icons.stop, 'STOP', _cubit.stop),
+          _buildButtonColumn(Colors.blue, Colors.blueAccent, Icons.pause, 'PAUSE', _cubit.pause),
+        ],
       ),
     );
   }
