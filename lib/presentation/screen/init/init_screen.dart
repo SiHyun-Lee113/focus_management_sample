@@ -5,7 +5,7 @@ import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_key
 import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_tts_service_extension.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen_state.dart';
 import 'package:barrier_free_test/presentation/screen/init/model/init_focus_meta_data.dart';
-import 'package:barrier_free_test/presentation/widgets/test_focus_widget.dart';
+import 'package:barrier_free_test/presentation/widgets/focus_management/test_focus_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

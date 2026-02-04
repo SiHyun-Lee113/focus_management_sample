@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:barrier_free_test/data/focus_management/focus_id_repository.dart';
 import 'package:barrier_free_test/domain/focus/models/focus_meta_data.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
@@ -7,14 +8,18 @@ import 'package:flutter/foundation.dart';
 abstract class BaseFocusMetaDataHandler<T extends FocusMetaData> {
   final StreamController<T> _streamController = StreamController<T>.broadcast();
   T? _currentFocusMetaData;
+  final FocusIdRepository _focusIdRepository = FocusIdRepository.instance;
 
   final Map<String, List<T>> _treeFocusMetaDataMap = {};
   final List<T> _allFocusMetaData = [];
   final Map<String, int> _sortOrderMap = {};
 
   bool isScreen(T metaData);
+
   bool isSection(T metaData);
+
   bool isWidget(T metaData);
+
   bool isLanguage(T metaData);
 
   @protected
@@ -24,11 +29,10 @@ abstract class BaseFocusMetaDataHandler<T extends FocusMetaData> {
   T findByFocusId(String id) => _allFocusMetaData.firstWhere((e) => e.focusId == id);
 
   @protected
-  void updateCurrentMetaData(T meta, {bool applyStream = true}) {
+  void updateCurrentMetaData(T meta) {
     _currentFocusMetaData = meta;
-    if (applyStream) {
-      _streamController.add(meta);
-    }
+    _streamController.add(meta);
+    _focusIdRepository.setFocus(meta.focusId);
   }
 
   T? _moveInList(List<T> list, String currentId, int offset) {
@@ -61,6 +65,7 @@ abstract class BaseFocusMetaDataHandler<T extends FocusMetaData> {
     _allFocusMetaData.clear();
     _sortOrderMap.clear();
     _currentFocusMetaData = null;
+    _focusIdRepository.clear();
   }
 
   T? getCurrentFocusMetaData() => _currentFocusMetaData;
