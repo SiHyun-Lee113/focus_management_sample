@@ -23,11 +23,9 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   InitFocusMetaData _findByFocusId(String id) =>
       _allFocusMetaData.firstWhere((e) => e.focusId == id);
 
-  void _updateCurrentInitFocusMetaData(InitFocusMetaData meta, {bool applyStream = true}) {
+  void _updateCurrentInitFocusMetaData(InitFocusMetaData meta) {
     _currentFocusMetaData = meta;
-    if (applyStream) {
-      _streamController.add(meta);
-    }
+    _streamController.add(meta);
   }
 
   InitFocusMetaData? _moveInList(List<InitFocusMetaData> list, String currentId, int offset) {
@@ -73,8 +71,15 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   Stream<InitFocusMetaData> getFocusMetaDataStream() => _streamController.stream;
 
   @override
-  void setCurrentFocusMetaDataById(String id, {bool applyStream = true}) =>
-      _updateCurrentInitFocusMetaData(_findByFocusId(id), applyStream: applyStream);
+  void setCurrentFocusMetaDataById(String id, {bool ttsMute = false}) {
+    InitFocusMetaData metaData = _findByFocusId(id);
+
+    if (ttsMute) {
+      metaData = metaData.copyWith(ttsMute: true);
+    }
+
+    _updateCurrentInitFocusMetaData(metaData);
+  }
 
   /* ----------------------------- navigation ----------------------------- */
 
@@ -176,7 +181,9 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
   }
 
   String getLanguageFocusMetaDataId(String languageName) {
-    InitFocusMetaData? language = _allFocusMetaData.firstWhereOrNull((e) => e is LanguageLevel && e.languageName == languageName);
+    InitFocusMetaData? language = _allFocusMetaData.firstWhereOrNull(
+      (e) => e is LanguageLevel && e.languageName == languageName,
+    );
 
     if (language == null) throw Exception('languageId is null $languageName');
 
@@ -209,6 +216,5 @@ class InitScreenFocusMetaDataHandler implements FocusMetaDataHandler<InitFocusMe
       case _:
         throw UnimplementedError();
     }
-
   }
 }

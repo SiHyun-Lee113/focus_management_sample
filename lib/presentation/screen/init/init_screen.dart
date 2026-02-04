@@ -5,6 +5,7 @@ import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_key
 import 'package:barrier_free_test/presentation/screen/init/init_screen_cubit_tts_service_extension.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen_state.dart';
 import 'package:barrier_free_test/presentation/screen/init/model/init_focus_meta_data.dart';
+import 'package:barrier_free_test/presentation/screen/tts/global_tts_demo_screen.dart';
 import 'package:barrier_free_test/presentation/widgets/test_focus_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class _InitScreenState extends State<InitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: BlocProvider.value(
         value: _cubit,
         child: BlocConsumer<InitScreenCubit, InitScreenState>(
@@ -52,6 +54,15 @@ class _InitScreenState extends State<InitScreen> {
                   _sectionHeader(state),
                   _sectionStartOrder(state),
                   _sectionLanguage(state),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const GlobalTtsDemoScreen()),
+                      );
+                    },
+                    child: const Text('to global tts'),
+                  ),
                 ],
               ),
             );

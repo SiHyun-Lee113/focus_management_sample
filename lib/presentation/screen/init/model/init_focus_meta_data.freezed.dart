@@ -20,6 +20,7 @@ mixin _$InitFocusMetaData {
   InitScreenFocusCode get focusCode => throw _privateConstructorUsedError;
   String get focusId => throw _privateConstructorUsedError;
   String get parentFocusId => throw _privateConstructorUsedError;
+  bool get ttsMute => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -27,6 +28,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )
     screen,
     required TResult Function(
@@ -34,6 +36,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )
     section,
     required TResult Function(
@@ -41,6 +44,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )
     widget,
     required TResult Function(
@@ -48,6 +52,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )
     language,
   }) => throw _privateConstructorUsedError;
@@ -58,6 +63,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult? Function(
@@ -65,6 +71,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult? Function(
@@ -72,6 +79,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult? Function(
@@ -79,6 +87,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
   }) => throw _privateConstructorUsedError;
@@ -89,6 +98,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult Function(
@@ -96,6 +106,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult Function(
@@ -103,6 +114,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult Function(
@@ -110,6 +122,7 @@ mixin _$InitFocusMetaData {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
     required TResult orElse(),
@@ -155,6 +168,7 @@ abstract class $InitFocusMetaDataCopyWith<$Res> {
     InitScreenFocusCode focusCode,
     String focusId,
     String parentFocusId,
+    bool ttsMute,
   });
 }
 
@@ -176,6 +190,7 @@ class _$InitFocusMetaDataCopyWithImpl<$Res, $Val extends InitFocusMetaData>
     Object? focusCode = null,
     Object? focusId = null,
     Object? parentFocusId = null,
+    Object? ttsMute = null,
   }) {
     return _then(
       _value.copyWith(
@@ -191,6 +206,10 @@ class _$InitFocusMetaDataCopyWithImpl<$Res, $Val extends InitFocusMetaData>
                 ? _value.parentFocusId
                 : parentFocusId // ignore: cast_nullable_to_non_nullable
                       as String,
+            ttsMute: null == ttsMute
+                ? _value.ttsMute
+                : ttsMute // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -211,6 +230,7 @@ abstract class _$$ScreenLevelImplCopyWith<$Res>
     String focusId,
     String parentFocusId,
     String screenName,
+    bool ttsMute,
   });
 }
 
@@ -232,6 +252,7 @@ class __$$ScreenLevelImplCopyWithImpl<$Res>
     Object? focusId = null,
     Object? parentFocusId = null,
     Object? screenName = null,
+    Object? ttsMute = null,
   }) {
     return _then(
       _$ScreenLevelImpl(
@@ -251,6 +272,10 @@ class __$$ScreenLevelImplCopyWithImpl<$Res>
             ? _value.screenName
             : screenName // ignore: cast_nullable_to_non_nullable
                   as String,
+        ttsMute: null == ttsMute
+            ? _value.ttsMute
+            : ttsMute // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -264,6 +289,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
     required this.focusId,
     this.parentFocusId = 'initScreen',
     required this.screenName,
+    this.ttsMute = false,
   }) : super._();
 
   @override
@@ -276,10 +302,13 @@ class _$ScreenLevelImpl extends ScreenLevel {
   final String parentFocusId;
   @override
   final String screenName;
+  @override
+  @JsonKey()
+  final bool ttsMute;
 
   @override
   String toString() {
-    return 'InitFocusMetaData.screen(focusCode: $focusCode, focusId: $focusId, parentFocusId: $parentFocusId, screenName: $screenName)';
+    return 'InitFocusMetaData.screen(focusCode: $focusCode, focusId: $focusId, parentFocusId: $parentFocusId, screenName: $screenName, ttsMute: $ttsMute)';
   }
 
   @override
@@ -293,12 +322,19 @@ class _$ScreenLevelImpl extends ScreenLevel {
             (identical(other.parentFocusId, parentFocusId) ||
                 other.parentFocusId == parentFocusId) &&
             (identical(other.screenName, screenName) ||
-                other.screenName == screenName));
+                other.screenName == screenName) &&
+            (identical(other.ttsMute, ttsMute) || other.ttsMute == ttsMute));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, focusCode, focusId, parentFocusId, screenName);
+  int get hashCode => Object.hash(
+    runtimeType,
+    focusCode,
+    focusId,
+    parentFocusId,
+    screenName,
+    ttsMute,
+  );
 
   /// Create a copy of InitFocusMetaData
   /// with the given fields replaced by the non-null parameter values.
@@ -316,6 +352,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )
     screen,
     required TResult Function(
@@ -323,6 +360,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )
     section,
     required TResult Function(
@@ -330,6 +368,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )
     widget,
     required TResult Function(
@@ -337,10 +376,11 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )
     language,
   }) {
-    return screen(focusCode, focusId, parentFocusId, screenName);
+    return screen(focusCode, focusId, parentFocusId, screenName, ttsMute);
   }
 
   @override
@@ -351,6 +391,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult? Function(
@@ -358,6 +399,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult? Function(
@@ -365,6 +407,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult? Function(
@@ -372,10 +415,11 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
   }) {
-    return screen?.call(focusCode, focusId, parentFocusId, screenName);
+    return screen?.call(focusCode, focusId, parentFocusId, screenName, ttsMute);
   }
 
   @override
@@ -386,6 +430,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult Function(
@@ -393,6 +438,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult Function(
@@ -400,6 +446,7 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult Function(
@@ -407,12 +454,13 @@ class _$ScreenLevelImpl extends ScreenLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
     required TResult orElse(),
   }) {
     if (screen != null) {
-      return screen(focusCode, focusId, parentFocusId, screenName);
+      return screen(focusCode, focusId, parentFocusId, screenName, ttsMute);
     }
     return orElse();
   }
@@ -461,6 +509,7 @@ abstract class ScreenLevel extends InitFocusMetaData {
     required final String focusId,
     final String parentFocusId,
     required final String screenName,
+    final bool ttsMute,
   }) = _$ScreenLevelImpl;
   const ScreenLevel._() : super._();
 
@@ -471,6 +520,8 @@ abstract class ScreenLevel extends InitFocusMetaData {
   @override
   String get parentFocusId;
   String get screenName;
+  @override
+  bool get ttsMute;
 
   /// Create a copy of InitFocusMetaData
   /// with the given fields replaced by the non-null parameter values.
@@ -494,6 +545,7 @@ abstract class _$$SectionLevelImplCopyWith<$Res>
     String focusId,
     String parentFocusId,
     String sectionName,
+    bool ttsMute,
   });
 }
 
@@ -515,6 +567,7 @@ class __$$SectionLevelImplCopyWithImpl<$Res>
     Object? focusId = null,
     Object? parentFocusId = null,
     Object? sectionName = null,
+    Object? ttsMute = null,
   }) {
     return _then(
       _$SectionLevelImpl(
@@ -534,6 +587,10 @@ class __$$SectionLevelImplCopyWithImpl<$Res>
             ? _value.sectionName
             : sectionName // ignore: cast_nullable_to_non_nullable
                   as String,
+        ttsMute: null == ttsMute
+            ? _value.ttsMute
+            : ttsMute // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -547,6 +604,7 @@ class _$SectionLevelImpl extends SectionLevel {
     required this.focusId,
     required this.parentFocusId,
     required this.sectionName,
+    this.ttsMute = false,
   }) : super._();
 
   @override
@@ -557,10 +615,13 @@ class _$SectionLevelImpl extends SectionLevel {
   final String parentFocusId;
   @override
   final String sectionName;
+  @override
+  @JsonKey()
+  final bool ttsMute;
 
   @override
   String toString() {
-    return 'InitFocusMetaData.section(focusCode: $focusCode, focusId: $focusId, parentFocusId: $parentFocusId, sectionName: $sectionName)';
+    return 'InitFocusMetaData.section(focusCode: $focusCode, focusId: $focusId, parentFocusId: $parentFocusId, sectionName: $sectionName, ttsMute: $ttsMute)';
   }
 
   @override
@@ -574,12 +635,19 @@ class _$SectionLevelImpl extends SectionLevel {
             (identical(other.parentFocusId, parentFocusId) ||
                 other.parentFocusId == parentFocusId) &&
             (identical(other.sectionName, sectionName) ||
-                other.sectionName == sectionName));
+                other.sectionName == sectionName) &&
+            (identical(other.ttsMute, ttsMute) || other.ttsMute == ttsMute));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, focusCode, focusId, parentFocusId, sectionName);
+  int get hashCode => Object.hash(
+    runtimeType,
+    focusCode,
+    focusId,
+    parentFocusId,
+    sectionName,
+    ttsMute,
+  );
 
   /// Create a copy of InitFocusMetaData
   /// with the given fields replaced by the non-null parameter values.
@@ -597,6 +665,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )
     screen,
     required TResult Function(
@@ -604,6 +673,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )
     section,
     required TResult Function(
@@ -611,6 +681,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )
     widget,
     required TResult Function(
@@ -618,10 +689,11 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )
     language,
   }) {
-    return section(focusCode, focusId, parentFocusId, sectionName);
+    return section(focusCode, focusId, parentFocusId, sectionName, ttsMute);
   }
 
   @override
@@ -632,6 +704,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult? Function(
@@ -639,6 +712,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult? Function(
@@ -646,6 +720,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult? Function(
@@ -653,10 +728,17 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
   }) {
-    return section?.call(focusCode, focusId, parentFocusId, sectionName);
+    return section?.call(
+      focusCode,
+      focusId,
+      parentFocusId,
+      sectionName,
+      ttsMute,
+    );
   }
 
   @override
@@ -667,6 +749,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult Function(
@@ -674,6 +757,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult Function(
@@ -681,6 +765,7 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult Function(
@@ -688,12 +773,13 @@ class _$SectionLevelImpl extends SectionLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
     required TResult orElse(),
   }) {
     if (section != null) {
-      return section(focusCode, focusId, parentFocusId, sectionName);
+      return section(focusCode, focusId, parentFocusId, sectionName, ttsMute);
     }
     return orElse();
   }
@@ -742,6 +828,7 @@ abstract class SectionLevel extends InitFocusMetaData {
     required final String focusId,
     required final String parentFocusId,
     required final String sectionName,
+    final bool ttsMute,
   }) = _$SectionLevelImpl;
   const SectionLevel._() : super._();
 
@@ -752,6 +839,8 @@ abstract class SectionLevel extends InitFocusMetaData {
   @override
   String get parentFocusId;
   String get sectionName;
+  @override
+  bool get ttsMute;
 
   /// Create a copy of InitFocusMetaData
   /// with the given fields replaced by the non-null parameter values.
@@ -775,6 +864,7 @@ abstract class _$$WidgetLevelImplCopyWith<$Res>
     String focusId,
     String parentFocusId,
     String widgetName,
+    bool ttsMute,
   });
 }
 
@@ -796,6 +886,7 @@ class __$$WidgetLevelImplCopyWithImpl<$Res>
     Object? focusId = null,
     Object? parentFocusId = null,
     Object? widgetName = null,
+    Object? ttsMute = null,
   }) {
     return _then(
       _$WidgetLevelImpl(
@@ -815,6 +906,10 @@ class __$$WidgetLevelImplCopyWithImpl<$Res>
             ? _value.widgetName
             : widgetName // ignore: cast_nullable_to_non_nullable
                   as String,
+        ttsMute: null == ttsMute
+            ? _value.ttsMute
+            : ttsMute // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -828,6 +923,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
     required this.focusId,
     required this.parentFocusId,
     required this.widgetName,
+    this.ttsMute = false,
   }) : super._();
 
   @override
@@ -838,10 +934,13 @@ class _$WidgetLevelImpl extends WidgetLevel {
   final String parentFocusId;
   @override
   final String widgetName;
+  @override
+  @JsonKey()
+  final bool ttsMute;
 
   @override
   String toString() {
-    return 'InitFocusMetaData.widget(focusCode: $focusCode, focusId: $focusId, parentFocusId: $parentFocusId, widgetName: $widgetName)';
+    return 'InitFocusMetaData.widget(focusCode: $focusCode, focusId: $focusId, parentFocusId: $parentFocusId, widgetName: $widgetName, ttsMute: $ttsMute)';
   }
 
   @override
@@ -855,12 +954,19 @@ class _$WidgetLevelImpl extends WidgetLevel {
             (identical(other.parentFocusId, parentFocusId) ||
                 other.parentFocusId == parentFocusId) &&
             (identical(other.widgetName, widgetName) ||
-                other.widgetName == widgetName));
+                other.widgetName == widgetName) &&
+            (identical(other.ttsMute, ttsMute) || other.ttsMute == ttsMute));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, focusCode, focusId, parentFocusId, widgetName);
+  int get hashCode => Object.hash(
+    runtimeType,
+    focusCode,
+    focusId,
+    parentFocusId,
+    widgetName,
+    ttsMute,
+  );
 
   /// Create a copy of InitFocusMetaData
   /// with the given fields replaced by the non-null parameter values.
@@ -878,6 +984,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )
     screen,
     required TResult Function(
@@ -885,6 +992,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )
     section,
     required TResult Function(
@@ -892,6 +1000,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )
     widget,
     required TResult Function(
@@ -899,10 +1008,11 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )
     language,
   }) {
-    return widget(focusCode, focusId, parentFocusId, widgetName);
+    return widget(focusCode, focusId, parentFocusId, widgetName, ttsMute);
   }
 
   @override
@@ -913,6 +1023,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult? Function(
@@ -920,6 +1031,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult? Function(
@@ -927,6 +1039,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult? Function(
@@ -934,10 +1047,11 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
   }) {
-    return widget?.call(focusCode, focusId, parentFocusId, widgetName);
+    return widget?.call(focusCode, focusId, parentFocusId, widgetName, ttsMute);
   }
 
   @override
@@ -948,6 +1062,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult Function(
@@ -955,6 +1070,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult Function(
@@ -962,6 +1078,7 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult Function(
@@ -969,12 +1086,13 @@ class _$WidgetLevelImpl extends WidgetLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
     required TResult orElse(),
   }) {
     if (widget != null) {
-      return widget(focusCode, focusId, parentFocusId, widgetName);
+      return widget(focusCode, focusId, parentFocusId, widgetName, ttsMute);
     }
     return orElse();
   }
@@ -1023,6 +1141,7 @@ abstract class WidgetLevel extends InitFocusMetaData {
     required final String focusId,
     required final String parentFocusId,
     required final String widgetName,
+    final bool ttsMute,
   }) = _$WidgetLevelImpl;
   const WidgetLevel._() : super._();
 
@@ -1033,6 +1152,8 @@ abstract class WidgetLevel extends InitFocusMetaData {
   @override
   String get parentFocusId;
   String get widgetName;
+  @override
+  bool get ttsMute;
 
   /// Create a copy of InitFocusMetaData
   /// with the given fields replaced by the non-null parameter values.
@@ -1056,6 +1177,7 @@ abstract class _$$LanguageLevelImplCopyWith<$Res>
     String focusId,
     String parentFocusId,
     String languageName,
+    bool ttsMute,
   });
 }
 
@@ -1077,6 +1199,7 @@ class __$$LanguageLevelImplCopyWithImpl<$Res>
     Object? focusId = null,
     Object? parentFocusId = null,
     Object? languageName = null,
+    Object? ttsMute = null,
   }) {
     return _then(
       _$LanguageLevelImpl(
@@ -1096,6 +1219,10 @@ class __$$LanguageLevelImplCopyWithImpl<$Res>
             ? _value.languageName
             : languageName // ignore: cast_nullable_to_non_nullable
                   as String,
+        ttsMute: null == ttsMute
+            ? _value.ttsMute
+            : ttsMute // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -1109,6 +1236,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
     required this.focusId,
     required this.parentFocusId,
     required this.languageName,
+    this.ttsMute = false,
   }) : super._();
 
   @override
@@ -1120,10 +1248,13 @@ class _$LanguageLevelImpl extends LanguageLevel {
   final String parentFocusId;
   @override
   final String languageName;
+  @override
+  @JsonKey()
+  final bool ttsMute;
 
   @override
   String toString() {
-    return 'InitFocusMetaData.language(focusCode: $focusCode, focusId: $focusId, parentFocusId: $parentFocusId, languageName: $languageName)';
+    return 'InitFocusMetaData.language(focusCode: $focusCode, focusId: $focusId, parentFocusId: $parentFocusId, languageName: $languageName, ttsMute: $ttsMute)';
   }
 
   @override
@@ -1137,12 +1268,19 @@ class _$LanguageLevelImpl extends LanguageLevel {
             (identical(other.parentFocusId, parentFocusId) ||
                 other.parentFocusId == parentFocusId) &&
             (identical(other.languageName, languageName) ||
-                other.languageName == languageName));
+                other.languageName == languageName) &&
+            (identical(other.ttsMute, ttsMute) || other.ttsMute == ttsMute));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, focusCode, focusId, parentFocusId, languageName);
+  int get hashCode => Object.hash(
+    runtimeType,
+    focusCode,
+    focusId,
+    parentFocusId,
+    languageName,
+    ttsMute,
+  );
 
   /// Create a copy of InitFocusMetaData
   /// with the given fields replaced by the non-null parameter values.
@@ -1160,6 +1298,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )
     screen,
     required TResult Function(
@@ -1167,6 +1306,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )
     section,
     required TResult Function(
@@ -1174,6 +1314,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )
     widget,
     required TResult Function(
@@ -1181,10 +1322,11 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )
     language,
   }) {
-    return language(focusCode, focusId, parentFocusId, languageName);
+    return language(focusCode, focusId, parentFocusId, languageName, ttsMute);
   }
 
   @override
@@ -1195,6 +1337,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult? Function(
@@ -1202,6 +1345,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult? Function(
@@ -1209,6 +1353,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult? Function(
@@ -1216,10 +1361,17 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
   }) {
-    return language?.call(focusCode, focusId, parentFocusId, languageName);
+    return language?.call(
+      focusCode,
+      focusId,
+      parentFocusId,
+      languageName,
+      ttsMute,
+    );
   }
 
   @override
@@ -1230,6 +1382,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String screenName,
+      bool ttsMute,
     )?
     screen,
     TResult Function(
@@ -1237,6 +1390,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String sectionName,
+      bool ttsMute,
     )?
     section,
     TResult Function(
@@ -1244,6 +1398,7 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String widgetName,
+      bool ttsMute,
     )?
     widget,
     TResult Function(
@@ -1251,12 +1406,13 @@ class _$LanguageLevelImpl extends LanguageLevel {
       String focusId,
       String parentFocusId,
       String languageName,
+      bool ttsMute,
     )?
     language,
     required TResult orElse(),
   }) {
     if (language != null) {
-      return language(focusCode, focusId, parentFocusId, languageName);
+      return language(focusCode, focusId, parentFocusId, languageName, ttsMute);
     }
     return orElse();
   }
@@ -1305,6 +1461,7 @@ abstract class LanguageLevel extends InitFocusMetaData {
     required final String focusId,
     required final String parentFocusId,
     required final String languageName,
+    final bool ttsMute,
   }) = _$LanguageLevelImpl;
   const LanguageLevel._() : super._();
 
@@ -1315,6 +1472,8 @@ abstract class LanguageLevel extends InitFocusMetaData {
   @override
   String get parentFocusId;
   String get languageName;
+  @override
+  bool get ttsMute;
 
   /// Create a copy of InitFocusMetaData
   /// with the given fields replaced by the non-null parameter values.

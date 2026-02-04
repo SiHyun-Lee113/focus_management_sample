@@ -13,6 +13,7 @@ sealed class InitFocusMetaData with _$InitFocusMetaData implements FocusMetaData
     required String focusId,
     @Default('initScreen') String parentFocusId,
     required String screenName,
+    @Default(false) bool ttsMute,
   }) = ScreenLevel;
 
   const factory InitFocusMetaData.section({
@@ -20,6 +21,7 @@ sealed class InitFocusMetaData with _$InitFocusMetaData implements FocusMetaData
     required String focusId,
     required String parentFocusId,
     required String sectionName,
+    @Default(false) bool ttsMute,
   }) = SectionLevel;
 
   const factory InitFocusMetaData.widget({
@@ -27,6 +29,7 @@ sealed class InitFocusMetaData with _$InitFocusMetaData implements FocusMetaData
     required String focusId,
     required String parentFocusId,
     required String widgetName,
+    @Default(false) bool ttsMute,
   }) = WidgetLevel;
 
   const factory InitFocusMetaData.language({
@@ -34,6 +37,7 @@ sealed class InitFocusMetaData with _$InitFocusMetaData implements FocusMetaData
     required String focusId,
     required String parentFocusId,
     required String languageName,
+    @Default(false) bool ttsMute,
   }) = LanguageLevel;
 
   static final String initScreenFocusId = 'initScreenFocusId';
