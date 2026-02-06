@@ -4,12 +4,13 @@ import 'package:barrier_free_test/data/tts/flutter_tts_service.dart';
 import 'package:barrier_free_test/presentation/screen/init/init_screen.dart';
 import 'package:barrier_free_test/presentation/screen/tts/tts_screen_cubit.dart';
 import 'package:barrier_free_test/presentation/screen/tts/tts_screen_state.dart';
+import 'package:barrier_free_test/presentation/widgets/setting_slider.dart';
+import 'package:barrier_free_test/presentation/widgets/slider_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TtsScreen extends StatefulWidget {
-
   const TtsScreen({super.key});
 
   @override
@@ -66,7 +67,10 @@ class _TtsScreenState extends State<TtsScreen> {
                     if (isAndroid) _getMaxSpeechInputLengthSection(state),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => InitScreen()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => InitScreen()),
+                        );
                       },
                       child: const Text('to init'),
                     ),
@@ -116,14 +120,10 @@ class _TtsScreenState extends State<TtsScreen> {
   }
 
   Widget _inputSection() => Container(
-        alignment: Alignment.topCenter,
-        padding: const EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
-        child: TextField(
-          maxLines: 11,
-          minLines: 6,
-          onChanged: _cubit.onTextChanged,
-        ),
-      );
+    alignment: Alignment.topCenter,
+    padding: const EdgeInsets.only(top: 25.0, left: 25.0, right: 25.0),
+    child: TextField(maxLines: 11, minLines: 6, onChanged: _cubit.onTextChanged),
+  );
 
   Widget _btnSection() {
     return Container(
@@ -131,7 +131,13 @@ class _TtsScreenState extends State<TtsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(Colors.green, Colors.greenAccent, Icons.play_arrow, 'PLAY', _cubit.speak),
+          _buildButtonColumn(
+            Colors.green,
+            Colors.greenAccent,
+            Icons.play_arrow,
+            'PLAY',
+            _cubit.speak,
+          ),
           _buildButtonColumn(Colors.red, Colors.redAccent, Icons.stop, 'STOP', _cubit.stop),
           _buildButtonColumn(Colors.blue, Colors.blueAccent, Icons.pause, 'PAUSE', _cubit.pause),
         ],
@@ -176,13 +182,22 @@ class _TtsScreenState extends State<TtsScreen> {
             onChanged: _cubit.changeLanguage,
           ),
           const SizedBox(width: 5.0),
-          Visibility(visible: isAndroid, child: Text("Is installed: ${state.isCurrentLanguageInstalled}")),
+          Visibility(
+            visible: isAndroid,
+            child: Text("Is installed: ${state.isCurrentLanguageInstalled}"),
+          ),
         ],
       ),
     );
   }
 
-  Column _buildButtonColumn(Color color, Color splashColor, IconData icon, String label, VoidCallback onPressed) {
+  Column _buildButtonColumn(
+    Color color,
+    Color splashColor,
+    IconData icon,
+    String label,
+    VoidCallback onPressed,
+  ) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -212,8 +227,22 @@ class _TtsScreenState extends State<TtsScreen> {
     );
   }
 
+  int initValue = 1;
   Widget _buildSliders(TtsScreenState state) {
-    return Column(children: [_volume(state), _pitch(state), _rate(state)]);
+    return Column(
+      children: [
+        _volume(state),
+        _pitch(state),
+        _rate(state),
+        StepSlider<int>(stepValues: [1, 2, 3, 4, 5], onStepChanged: (value) {
+          setState(() {
+            initValue = value;
+          });
+
+          print('_TtsScreenState._buildSliders $initValue');
+        }, value: initValue),
+      ],
+    );
   }
 
   Widget _volume(TtsScreenState state) {
@@ -252,7 +281,9 @@ class _TtsScreenState extends State<TtsScreen> {
   }
 
   List<DropdownMenuItem<String?>> _buildEngineItems(List<String?> engines) {
-    final items = engines.map((item) => DropdownMenuItem<String?>(value: item, child: Text(item ?? ''))).toList();
+    final items = engines
+        .map((item) => DropdownMenuItem<String?>(value: item, child: Text(item ?? '')))
+        .toList();
     return items;
   }
 
@@ -267,7 +298,9 @@ class _TtsScreenState extends State<TtsScreen> {
         items.add(menuItem);
       }
     }
-    items.sort((a, b) => a.child.toString().toLowerCase().compareTo(b.child.toString().toLowerCase()));
+    items.sort(
+      (a, b) => a.child.toString().toLowerCase().compareTo(b.child.toString().toLowerCase()),
+    );
     return items;
   }
 
@@ -279,7 +312,9 @@ class _TtsScreenState extends State<TtsScreen> {
         items.add(menuItem);
       }
     }
-    items.sort((a, b) => a.child.toString().toLowerCase().compareTo(b.child.toString().toLowerCase()));
+    items.sort(
+      (a, b) => a.child.toString().toLowerCase().compareTo(b.child.toString().toLowerCase()),
+    );
     return items;
   }
 }

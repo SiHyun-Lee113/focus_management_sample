@@ -18,9 +18,9 @@ class TestFocusWidget extends StatelessWidget {
     /// 1. 현재 활성화 되어 있는 focusHandler 혹은 screen 정보 습득
     /// 그 핸들러에서 currentFocusMetaData 추룰
     /// bool hasFocus = currentFocusMetaData?.focusId == focusId
-    final currentFocusId = context.watch<FocusWidgetCubit>().state;
-    final hasFocus = currentFocusId == focusId;
-
+    final hasFocus = context.select<FocusWidgetCubit, bool>(
+          (cubit) => cubit.state == focusId,
+    );
 
     if (hasFocus) {
       return Container(
