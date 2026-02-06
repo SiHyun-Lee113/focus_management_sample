@@ -22,13 +22,20 @@ class StepSlider<T> extends StatelessWidget {
         final sliderWidth = constraints.maxWidth;
         final stepCount = stepValues.length;
         final hasSteps = stepCount > 1;
-        final stepSpacing = hasSteps ? sliderWidth / (stepCount - 1) : 0.0;
+        const stepIndicatorWidth = 11.0;
+        final stepSpacing = hasSteps ? (sliderWidth - stepIndicatorWidth) / (stepCount - 1) : 0.0;
         const currentIndicatorRadius = 10.0;
+
+        double stepCenterX(int index) {
+          if (!hasSteps) return 0.0;
+          return (index * stepSpacing) + (stepIndicatorWidth / 2);
+        }
 
         void updateByPosition(double localDx) {
           if (!hasSteps) return;
           final clampedDx = localDx.clamp(0.0, sliderWidth);
-          final index = (clampedDx / stepSpacing).round().clamp(0, stepCount - 1);
+          final normalized = (clampedDx - (stepIndicatorWidth / 2)) / stepSpacing;
+          final index = normalized.round().clamp(0, stepCount - 1);
           final nextValue = stepValues[index];
           if (nextValue == value) return;
           onStepChanged(nextValue);
@@ -80,7 +87,7 @@ class StepSlider<T> extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                    width: hasSteps ? (currentIndex * stepSpacing) : 0,
+                    width: hasSteps ? stepCenterX(currentIndex) : 0,
                     height: 28 * size.aspectRatio,
                     decoration: const BoxDecoration(
                       color: Color(0xFFD28A3C),
@@ -91,9 +98,7 @@ class StepSlider<T> extends StatelessWidget {
 
 
                 Positioned(
-                  left: hasSteps
-                      ? (currentIndex * stepSpacing).clamp(0.0, sliderWidth) - currentIndicatorRadius
-                      : 0.0,
+                  left: hasSteps ? stepCenterX(currentIndex) - currentIndicatorRadius : 0.0,
                   top: 0,
                   bottom: 0,
                   child: Center(
